@@ -1,0 +1,17 @@
+﻿{
+  "Table": "VouchsLink",
+  "Fields": [
+    {
+      "DbField": "Id",
+      "Type": "int"
+    },
+    {
+      "DbField": "VouchId",
+      "Type": "int"
+    },
+    {
+      "DbField": "SourceVouchId",
+      "Type": "int"
+    }
+  ]
+}

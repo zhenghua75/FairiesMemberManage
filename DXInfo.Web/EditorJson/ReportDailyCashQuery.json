@@ -1,0 +1,57 @@
+﻿{
+  "Table": "#T AS Cons",
+  "Fields": [
+    {
+      "DbField": "Cons.vcOperName",
+      "Options": {
+        "Table": "Users",
+        "Value": "FullName",
+        "Label": "FullName"
+      }
+    },
+    {
+      "DbField": "Cons.vcConsType",
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='BusiIncome') AS NameCode",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "NameCodePT.Name"
+    },
+    {
+      "DbField": "Cons.ConsCount"
+    },
+    {
+      "DbField": "Cons.ConsFee"
+    },
+    {
+      "DbField": "Cons.vcDeptId",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Cons.dtConsDate"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "(SELECT * FROM NameCode WHERE Type='PT') AS NameCodePT",
+      "Field1": "Cons.vcConsType",
+      "Field2": "NameCodePT.Code"
+    }
+  ],
+  "Event": {
+    "Type": "DXInfo.DataTables.Events.ReportDailyCashQuery,DXInfo.DataTables.Events",
+    "Methods": [
+      {
+        "EventName": "PreSelect",
+        "MethodName": "PreReportDailyCashQuerySelect"
+      }
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+﻿{
+  "Table": "CurrentStock",
+  "Fields": [
+    {
+      "DbField": "WhId",
+      "Type": "int"
+    },
+    {
+      "DbField": "LocatorId",
+      "Type": "int"
+    },
+    {
+      "DbField": "InvId",
+      "Type": "int"
+    },
+    {
+      "DbField": "Batch"
+    },
+    {
+      "DbField": "Num",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "MadeDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "InvalidDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "StopFlag",
+      "Type": "bool"
+    },
+    {
+      "DbField": "Price",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "Amount",
+      "Type": "decimal"
+    }
+  ]
+}

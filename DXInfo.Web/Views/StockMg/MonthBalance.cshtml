@@ -1,0 +1,90 @@
+﻿<div id="page-content">
+    <nav class="breadcrumb hidden-xs">
+        <i class="iconfont icon-home"></i>
+        <a class="maincolor" href="/">主控台</a>
+        <span class="c-999">&gt;</span>库存管理
+        <span class="c-999">&gt;</span><span class="c-666">日常业务</span>
+        <span class="c-999">&gt;</span><span class="c-666">@ViewBag.Title</span>
+    </nav>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-primary radius">
+                <div class="panel-header">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-fangda4 btn-default yuanbtn-MINI" data-click="panel-expand"></a>
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-huanyipi btn-success yuanbtn-MINI" data-click="panel-reload"></a>
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-jianhao btn-warning yuanbtn-MINI" data-click="panel-collapse"></a>
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-close btn-danger yuanbtn-MINI" data-click="panel-remove"></a>
+                    </div>
+                    <h4 class="panel-title">@ViewBag.Title<span class="f-14 ml-20"></span></h4>
+                </div>
+                <div class="panel-body">
+                    <input type="hidden" id="curmvid" value="@ViewBag.Mvid" />
+                    <input type="hidden" id="curmvtype" value="@ViewBag.Mvtype" />
+                    <input id="gparamuserwhid" type="hidden" value="@User.Identity.GetWhId()" />
+                    <input type="hidden" id="isverify" />
+                    @if (User.Identity.GetIsLocator())
+                    {
+                        <input id="gparamisloctor" type="hidden" value="true" />
+                    }
+                    else
+                    {
+                        <input id="gparamisloctor" type="hidden" value="false" />
+                    }
+                    @if (User.Identity.GetIsBatch())
+                    {
+                        <input id="gparamisbatch" type="hidden" value="true" />
+                    }
+                    else
+                    {
+                        <input id="gparamisbatch" type="hidden" value="false" />
+                    }
+                    @if (User.Identity.GetIsShelfLife())
+                    {
+                        <input id="gparamisshlife" type="hidden" value="true" />
+                    }
+                    else
+                    {
+                        <input id="gparamisshlife" type="hidden" value="false" />
+                    }
+                    <div class="row cl mb-5">
+                        <div class="col-sm-12 editortoolbar">
+                            <div class="dt-buttons btn-group group3 hide col-sm-4">
+                                <a class="btn btn-primary radius size-S disabled" id="mvverify"><span>审核</span></a>
+                                <a class="btn btn-primary radius size-S disabled" id="mvunverify"><span>弃审</span></a>
+                                <a class="btn btn-primary radius size-S" href="/StockMg/Vouch?type=013"><span>返回</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row widget radius bg-silver-lighter mb-20">
+                        <form class="form row form-panel" id="formmv"></form>
+                    </div>
+                    <table id="stockmgmonthbalance" class="table table-border table-bordered table-bg table-striped display responsive nowrap"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        //返回顶部
+        var $backToTopEle = $('<a href="javascript:void(0)" class="iconfont icon-top toTop" title="返回顶部" alt="返回顶部" style="display: none"></a>').appendTo($("body")).click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 120);
+        });
+        var $backToTopFun = function () {
+            var st = $(document).scrollTop(), winh = $(window).height();
+            (st > 0) ? $backToTopEle.show() : $backToTopEle.hide();
+            /*IE6下的定位*/
+            if (!window.XMLHttpRequest) {
+                $backToTopEle.css("top", st + winh - 166);
+            }
+        };
+        $(function () { $(window).on("scroll", $backToTopFun); $backToTopFun(); });
+        $(document).ready(function() {
+            App.init();
+        });
+        var userid = '@ViewBag.Userid';
+    </script>
+    <script src="~/Scripts/stockmgmonthbalance.js"></script>
+}

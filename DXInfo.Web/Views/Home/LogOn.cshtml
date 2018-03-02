@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "登录";
+}
+<div id="page-loader" class="fade in"><span class="spinner"></span></div>
+<div id="page-container" class="row cl">
+    <div class="login-wrap container radius" data-pageload-addclass="animated swing">
+        <div class="login-header cl">
+            <img class="login-wrap-logo" src="~/Content/img/logo.png" alt="" />
+            <span class="login-wrap-title">面包派对网络数据中心</span>
+        </div>
+        <div class="login-container cl">
+            <form action="" class="form form-horizontal">
+                <div class="formControls">
+                    <span class="iconfont icon-denglu admin-ico"></span>
+                    <input type="text" class="input-text radius admin size-L" placeholder="请输入用户名">
+                </div>
+                <div class="formControls mt-20">
+                    <span class="iconfont icon-suoding pasw-ico"></span>
+                    <input type="password" class="input-text radius pasw size-L" autocomplete="off" placeholder="请输入密码">
+                </div>
+                <div class="login-button mt-20">
+                    <input class="btn btn-block wrap-btn radius size-L" type="submit" value="登 录">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+    $(document).ready(function() {
+        App.init();
+    });
+    </script>
+}

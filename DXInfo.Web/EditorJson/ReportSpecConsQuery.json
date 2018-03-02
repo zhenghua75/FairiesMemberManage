@@ -1,0 +1,84 @@
+﻿{
+  "Table": "tbBillOther",
+  "PKey": "Inventory.Name",
+  "Fields": [
+    {
+      "DbField": "tbBillOther.vcConsType",
+      "Group": true,
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='PT' AND Code in ('PT003','PT004','PT005','PT006','PT007')) AS NameCode",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "NameCodePT.Name",
+      "Group": true
+    },
+    {
+      "DbField": "Inventory.Name",
+      "Group": true
+    },
+    {
+      "DbField": "SUM(tbConsItemOther.iCount) AS tbConsItemOther.tolCount"
+    },
+    {
+      "DbField": "SUM(tbConsItemOther.iCount * InvSale.Price) AS tbConsItemOther.tolfee"
+    },
+    {
+      "DbField": "SUM(tbConsItemOther.nFee) AS tbConsItemOther.tolcash"
+    },
+    {
+      "DbField": "'' AS tbBillOther.dtConsDate"
+    },
+    {
+      "DbField": "'' AS tbBillOther.vcOperName",
+      "Options": {
+        "Table": "Users",
+        "Value": "FullName",
+        "Label": "FullName"
+      }
+    },
+    {
+      "DbField": "'' AS tbBillOther.vcDeptId",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    }
+  ],
+  "Wheres": [
+    {
+      "Key": "tbConsItemOther.cFlag",
+      "Value": "'0'"
+    },
+    {
+      "Key": "tbBillOther.vcConsType",
+      "Value": "('PT003','PT004','PT005','PT006','PT007')",
+      "Op": "in"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "tbConsItemOther",
+      "IsCondition": true,
+      "Condition": "tbBillOther.vcDeptID=tbConsItemOther.vcDeptID AND tbBillOther.iSerial=tbConsItemOther.iSerial"
+    },
+    {
+      "Table": "Inventory",
+      "Field1": "tbConsItemOther.vcGoodsID",
+      "Field2": "Inventory.Code"
+    },
+    {
+      "Table": "InvSale",
+      "Field1": "Inventory.Id",
+      "Field2": "InvSale.Id"
+    },
+    {
+      "Table": "(SELECT * FROM NameCode WHERE Type='PT' AND Code in ('PT003','PT004','PT005','PT006','PT007')) AS NameCodePT",
+      "Field1": "tbBillOther.vcConsType",
+      "Field2": "NameCodePT.Code"
+    }
+  ]
+}

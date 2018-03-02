@@ -1,0 +1,57 @@
+﻿{
+  "Table": "#T AS SaleBalance",
+  "Fields": [
+    {
+      "DbField": "SaleBalance.vcDeptID",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Depts.Name"
+    },
+    {
+      "DbField": "SaleBalance.vcGoodsId",
+      "Options": {
+        "Table": "(SELECT b.Code,b.Name FROM InvSale a LEFT JOIN Inventory b ON a.Id=b.Id) AS Inv",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Inventory.Name"
+    },
+    {
+      "DbField": "SaleBalance.BalanceDate"
+    },
+    {
+      "DbField": "SaleBalance.LastCheckQuantity"
+    },
+    {
+      "DbField": "SaleBalance.InQuantity"
+    },
+    {
+      "DbField": "SaleBalance.Quantity"
+    },
+    {
+      "DbField": "SaleBalance.CheckQuantity"
+    },
+    {
+      "DbField": "SaleBalance.Differences"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Depts",
+      "Field1": "SaleBalance..vcDeptID",
+      "Field2": "Depts.Code"
+    },
+    {
+      "Table": "Inventory",
+      "Field1": "SaleBalance.vcGoodsId",
+      "Field2": "Inventory.Id"
+    }
+  ]
+}

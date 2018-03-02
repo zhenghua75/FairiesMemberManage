@@ -1,0 +1,37 @@
+﻿{
+  "Table": "UOMGroup",
+  "Fields": [
+    {
+      "DbField": "UOMGroup.Code"
+    },
+    {
+      "DbField": "UOMGroup.Name"
+    },
+    {
+      "DbField": "UOMGroup.GroupType",
+      "Type": "int",
+      "Options": {
+        "Table": "NameCode",
+        "Value": "Value",
+        "Label": "Name",
+        "Condition": {
+          "Key": "Type",
+          "Value": "MeasurementUnitGroupCategory"
+        }
+      }
+    },
+    {
+      "DbField": "NameCode.Name"
+    },
+    {
+      "DbField": "UOMGroup.Comment"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "(select * from NameCode where Type = 'MeasurementUnitGroupCategory') as NameCode",
+      "Field1": "UOMGroup.GroupType",
+      "Field2": "NameCode.Value"
+    }
+  ]
+}

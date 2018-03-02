@@ -1,0 +1,72 @@
+﻿{
+  "Table": "Vouch",
+  "Fields": [
+    {
+      "DbField": "Vouch.Id",
+      "Type": "int"
+    },
+    {
+      "DbField": "Vouch.SourceId",
+      "Type": "int"
+    },
+    {
+      "DbField": "Warehouse.Name"
+    },
+    {
+      "DbField": "Vouch.FromWhId"
+    },
+    {
+      "DbField": "Vouch.Code"
+    },
+    {
+      "DbField": "Vouch.MakeTime"
+    },
+    {
+      "DbField": "Users.FullName"
+    }
+  ],
+  "Wheres":[
+    {
+	"Key":"VouchLink.Id",
+	"Op":" ",
+	"Value": "IS NULL"
+    },
+    {
+	"Key":"TransVouch.Id",
+	"Op":" ",
+	"Value": "IS NULL"
+    },
+    {
+	"Key":"Vouch.IsVerify",
+	"Op":"=",
+	"Value": 1
+    },
+    {
+	"Key":"Vouch.VouchType",
+	"Op":"=",
+	"Value": "012"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "VouchLink",
+      "Field1": "Vouch.Id",
+      "Field2": "VouchLink.Id"
+    },
+    {
+      "Table": "Vouch AS TransVouch",
+      "IsCondition": true,
+      "Condition": " TransVouch.VouchType='009' AND TransVouch.IsVerify=1 AND TransVouch.SourceId=Vouch.Id"
+    },
+    {
+      "Table": "Warehouse",
+      "Field1": "Vouch.ToWhId",
+      "Field2": "Warehouse.Id"
+    },
+    {
+      "Table": "Users",
+      "Field1": "Vouch.Maker",
+      "Field2": "Users.Id"
+    }
+  ]
+}

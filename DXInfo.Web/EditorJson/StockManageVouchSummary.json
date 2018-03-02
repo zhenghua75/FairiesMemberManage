@@ -1,0 +1,82 @@
+﻿{
+  "Table": "Vouchs",
+  "PKey": "InvId",
+  "Fields": [
+    {
+      "DbField": "Vouchs.InvId",
+      "Group": true,
+      "Options": {
+        "Table": "Inventory",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Inventory.Name",
+      "Group": true
+    },
+    {
+      "DbField": "Vouch.VouchType",
+      "Group": true,
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='VouchType') AS NameCodeVT",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Vouch.BusType",
+      "Group": true,
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='BusType') AS NameCodeBT",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Vouch.FromWhId",
+      "Group": true,
+      "Options": {
+        "Table": "Warehouse",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Vouch.ToWhId",
+      "Group": true,
+      "Options": {
+        "Table": "Warehouse",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "SUM(Vouchs.Num) AS Vouchs.Num",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "AVG(Vouchs.Price) AS Vouchs.Price",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "SUM(Vouchs.Amount) AS Vouchs.Amount",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "'' AS Vouch.VouchDate"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Vouch",
+      "Field1": "Vouchs.VouchId",
+      "Field2": "Vouch.Id"
+    },
+    {
+      "Table": "Inventory",
+      "Field1": "Vouchs.InvId",
+      "Field2": "Inventory.Id"
+    }
+  ]
+}

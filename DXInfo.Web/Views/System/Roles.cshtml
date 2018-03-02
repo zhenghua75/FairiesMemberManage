@@ -1,0 +1,53 @@
+﻿<div id="page-content">
+    <nav class="breadcrumb hidden-xs">
+        <i class="iconfont icon-home"></i>
+        <a class="maincolor" href="/">主控台</a>
+        <span class="c-999">&gt;</span>系统管理
+        <span class="c-999">&gt;</span><span class="c-666">角色</span>
+    </nav>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-primary radius" id="rolestable">
+                <div class="panel-header">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-fangda4 btn-default yuanbtn-MINI" data-click="panel-expand"></a>
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-huanyipi btn-success yuanbtn-MINI" data-click="panel-reload"></a>
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-jianhao btn-warning yuanbtn-MINI" data-click="panel-collapse"></a>
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-close btn-danger yuanbtn-MINI" data-click="panel-remove"></a>
+                    </div>
+                    <h4 class="panel-title">角色管理</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="alone-panels row">
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <button class="alone-create widget radius bg-green-darker">新建角色</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        //返回顶部
+        var $backToTopEle = $('<a href="javascript:void(0)" class="iconfont icon-top toTop" title="返回顶部" alt="返回顶部" style="display: none"></a>').appendTo($("body")).click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 120);
+        });
+        var $backToTopFun = function () {
+            var st = $(document).scrollTop(), winh = $(window).height();
+            (st > 0) ? $backToTopEle.show() : $backToTopEle.hide();
+            /*IE6下的定位*/
+            if (!window.XMLHttpRequest) {
+                $backToTopEle.css("top", st + winh - 166);
+            }
+        };
+        $(function () { $(window).on("scroll", $backToTopFun); $backToTopFun(); });
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    <script src="~/Scripts/roles.js"></script>
+}

@@ -1,0 +1,168 @@
+﻿{
+  "Table": "Vouch",
+  "Fields": [
+    {
+      "DbField": "Vouch.Code"
+    },
+    {
+      "DbField": "Vouch.VouchType"
+    },
+    {
+      "DbField": "Vouch.BusType"
+    },
+    {
+      "DbField": "Vouch.VouchDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd",
+      "Validators": [
+        {
+          "Name": "Required",
+          "Message": "请输入单据日期"
+        },
+        {
+          "Name": "DateFormat",
+          "Format": "yyyy-MM-dd",
+          "Message": "单据日期格式错误"
+        }
+      ]
+    },
+    {
+      "DbField": "Vouch.ToWhId",
+      "Type": "int",
+      "Options": {
+        "Table": "Warehouse",
+        "Value": "Id",
+        "Label": "Name"
+      },
+      "Validators": [
+        {
+          "Name": "Required",
+          "Message": "请选择仓库"
+        }
+      ]
+    },
+    {
+      "DbField": "ToWarehouse.Name"
+    },
+    {
+      "DbField": "Vouch.VenId",
+      "Type": "int",
+      "Options": {
+        "Table": "Vendor",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Vendor.Name"
+    },
+    {
+      "DbField": "Vouch.Memo"
+    },
+    {
+      "DbField": "Vouch.Maker",
+      "Type": "int"
+    },
+    {
+      "DbField": "MakerUsers.FullName"
+    },
+    {
+      "DbField": "Vouch.MakeDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Vouch.MakeTime"
+    },
+    {
+      "DbField": "Vouch.IsVerify",
+      "Type": "bool",
+      "Validators": [
+        {
+          "Name": "Boolean",
+          "Message": "请输入布尔值"
+        }
+      ]
+    },
+    {
+      "DbField": "Vouch.Verifier",
+      "Type": "int"
+    },
+    {
+      "DbField": "VerifierUsers.FullName"
+    },
+    {
+      "DbField": "Vouch.VerifyDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Vouch.VerifyTime"
+    },
+    {
+      "DbField": "Vouch.Modifier",
+      "Type": "int"
+    },
+    {
+      "DbField": "ModifierUsers.FullName"
+    },
+    {
+      "DbField": "Vouch.ModifyDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Vouch.ModifyTime"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Warehouse as ToWarehouse",
+      "Field1": "Vouch.ToWhId",
+      "Field2": "ToWarehouse.Id"
+    },
+    {
+      "Table": "Vendor",
+      "Field1": "Vouch.VenId",
+      "Field2": "Vendor.Id"
+    },
+    {
+      "Table": "Users as MakerUsers",
+      "Field1": "Vouch.Maker",
+      "Field2": "MakerUsers.Id"
+    },
+    {
+      "Table": "Users as VerifierUsers",
+      "Field1": "Vouch.Verifier",
+      "Field2": "VerifierUsers.Id"
+    },
+    {
+      "Table": "Users as ModifierUsers",
+      "Field1": "Vouch.Modifier",
+      "Field2": "ModifierUsers.Id"
+    }
+  ],
+  "Wheres": [
+    {
+      "Key": "VouchType",
+      "Value": "001"
+    }
+  ],
+  "Event": {
+    "Type": "DXInfo.DataTables.Events.Vouch,DXInfo.DataTables.Events",
+    "Methods": [
+      {
+        "EventName": "PreCreate",
+        "MethodName": "PreVouchCreate"
+      },
+      {
+        "EventName": "PreEdit",
+        "MethodName": "PreVouchEdit"
+      },
+      {
+        "EventName": "PreRemove",
+        "MethodName": "PreVouchRemove"
+      }
+    ]
+  }
+}

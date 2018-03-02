@@ -1,0 +1,41 @@
+﻿{
+  "Table": "Users",
+  "Fields": [
+    {
+      "DbField": "Id",
+      "Type": "int"
+    },
+    {
+      "DbField": "FullName"
+    },
+    {
+      "DbField": "UserName"
+    }
+  ],
+  "MJoin": {
+    "Table": "Funcs",
+    "Link1": {
+      "Field1": "Users.Id",
+      "Field2": "HomeControls.UserId"
+    },
+    "Link2": {
+      "Field1": "Funcs.Id",
+      "Field2": "HomeControls.FuncId"
+    },
+    "Fields": [
+      {
+        "DbField": "Id",
+        "Type": "int",
+        "Options": {
+          "Table": "Funcs",
+          "Value": "Id",
+          "Labels": [ "Name", "Title", "Url", "ParentId", "FuncType", "Sort" ],
+          "Condition": {
+            "Key": "Invalidate",
+            "Value": false
+          }
+        }
+      }
+    ]
+  }
+}

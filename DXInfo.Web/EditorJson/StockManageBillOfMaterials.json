@@ -1,0 +1,48 @@
+﻿{
+  "Table": "BOM",
+  "Fields": [
+    {
+      "DbField": "BOM.PartInvId",
+      "Type": "int",
+      "Options": {
+        "Table": "Inventory",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Part.Name"
+    },
+    {
+      "DbField": "BOM.ComponentInvId",
+      "Options": {
+        "Table": "Inventory",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Component.Name"
+    },
+    {
+      "DbField": "BOM.BaseQtyN",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "BOM.BaseQtyD",
+      "Type": "decimal"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Inventory as Part",
+      "Field1": "BOM.PartInvId",
+      "Field2": "Part.Id"
+    },
+    {
+      "Table": "Inventory as Component",
+      "Field1": "BOM.ComponentInvId",
+      "Field2": "Component.Id"
+    }
+  ]
+}

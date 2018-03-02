@@ -1,0 +1,40 @@
+﻿<div id="page-content">
+    <nav class="breadcrumb hidden-xs">
+        <i class="iconfont icon-home"></i>
+        <a class="maincolor" href="/">主控台</a>
+        <span class="c-999">&gt;</span>关于
+    </nav>
+
+    <div class="row cl about-dxlogo">
+        <div class="col-sm-4 about-logo text-r">
+            <img alt="昆明道讯科技有限公司" class="img-responsive" src="~/Content/img/logo.png" />
+        </div>
+        <div class="col-sm-8 about-dxname text-l">
+            <img alt="昆明道讯科技有限公司" class="img-responsive" src="~/Content/img/dxname.png" />
+        </div>
+    </div>
+
+    <div class="row text-c mt-40">
+        <strong class="c-666">Copyright ©2011 - 2013 DXInfo. All Rights Reserved. Design by 昆明道讯科技有限公司.</strong>
+    </div>
+</div>
+@section scripts{
+    <script>
+        //返回顶部
+        var $backToTopEle = $('<a href="javascript:void(0)" class="iconfont icon-top toTop" title="返回顶部" alt="返回顶部" style="display: none"></a>').appendTo($("body")).click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 120);
+        });
+        var $backToTopFun = function () {
+            var st = $(document).scrollTop(), winh = $(window).height();
+            (st > 0) ? $backToTopEle.show() : $backToTopEle.hide();
+            /*IE6下的定位*/
+            if (!window.XMLHttpRequest) {
+                $backToTopEle.css("top", st + winh - 166);
+            }
+        };
+        $(function () { $(window).on("scroll", $backToTopFun); $backToTopFun(); });
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+}

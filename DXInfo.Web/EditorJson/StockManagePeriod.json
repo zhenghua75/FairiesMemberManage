@@ -1,0 +1,60 @@
+﻿{
+  "Table": "CheckPeriod",
+  "Fields": [
+    {
+      "DbField": "Code"
+    },
+    {
+      "DbField": "BeginDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd",
+      "Validators": [
+        {
+          "Name": "Required",
+          "Message": "请输入日期"
+        },
+        {
+          "Name": "DateFormat",
+          "Format": "yyyy-MM-dd",
+          "Message": "日期格式错误"
+        }
+      ]
+    },
+    {
+      "DbField": "EndDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd",
+      "Validators": [
+        {
+          "Name": "Required",
+          "Message": "请输入日期"
+        },
+        {
+          "Name": "DateFormat",
+          "Format": "yyyy-MM-dd",
+          "Message": "日期格式错误"
+        }
+      ]
+    },
+    {
+      "DbField": "Memo"
+    }
+  ],
+  "Event": {
+    "Type": "DXInfo.DataTables.Events.StockManagePeriod,DXInfo.DataTables.Events",
+    "Methods": [
+      {
+        "EventName": "PreCreate",
+        "MethodName": "PreStockManagePeriodCreate"
+      },
+      {
+        "EventName": "PreEdit",
+        "MethodName": "PreStockManagePeriodEdit"
+      },
+      {
+        "EventName": "PreRemove",
+        "MethodName": "PreStockManagePeriodRemove"
+      }
+    ]
+  }
+}

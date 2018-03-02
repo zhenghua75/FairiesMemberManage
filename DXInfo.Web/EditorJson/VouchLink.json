@@ -1,0 +1,72 @@
+﻿{
+  "Table": "VouchLink",
+  "Fields": [
+    {
+      "DbField": "VouchLink.Id",
+      "Type": "int"
+    },
+    {
+      "DbField": "VouchLink.SourceId",
+      "Type": "int"
+    },
+    {
+      "DbField": "Warehouse.Name"
+    },
+    {
+      "DbField": "Vouch.Code"
+    },
+    {
+      "DbField": "Users.FullName"
+    },
+    {
+      "DbField": "Vouch.MakeTime"
+    },
+    {
+      "DbField": "TransVouch.IsVerify",
+      "Type": "bool"
+    },
+    {
+      "DbField": "OtherInStock.IsVerify",
+      "Type": "bool"
+    },
+    {
+      "DbField": "TransVouch.Id",
+      "Type": "int"
+    },
+    {
+      "DbField": "TransVouch.MakeDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "TransVouch.Code"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Vouch",
+      "Field1": "VouchLink.Id",
+      "Field2": "Vouch.Id"
+    },
+    {
+      "Table": "Vouch as TransVouch",
+      "IsCondition": true,
+      "Condition": "TransVouch.VouchType='009' AND Vouch.Id=TransVouch.SourceId"
+    },
+    {
+      "Table": "Vouch as OtherInStock",
+      "IsCondition": true,
+      "Condition": "TransVouch.VouchType='009' AND OtherInStock.VouchType='003' AND TransVouch.Id=OtherInStock.SourceId"
+    },
+    {
+      "Table": "Warehouse",
+      "Field1": "Vouch.ToWhId",
+      "Field2": "Warehouse.Id"
+    },
+    {
+      "Table": "Users",
+      "Field1": "Vouch.Maker",
+      "Field2": "Users.Id"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+﻿{
+  "Table": "Vendor",
+  "Fields": [
+    {
+      "DbField": "Code"
+    },
+    {
+      "DbField": "Name"
+    },
+    {
+      "DbField": "Tel"
+    },
+    {
+      "DbField": "Fax"
+    },
+    {
+      "DbField": "Phone"
+    },
+    {
+      "DbField": "Zip"
+    },
+    {
+      "DbField": "Linkman"
+    },
+    {
+      "DbField": "Address"
+    },
+    {
+      "DbField": "Email"
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    html{
+        background-image:none !important
+    }
+</style>
+<div class="row cl">
+    <div class="col-sm-4">
+        <form id="submit_callApi" class="form form-horizontal">
+            <h3>Invoke API</h3>
+            <div class="row">
+                <label class="form-label col-sm-3">User</label>
+                <div class="form-control col-sm-9">
+                    <input class="input-text" type="text" readonly disabled id="value_user" />
+                </div>
+            </div>
+            <div class="row">
+                <label class="form-label col-sm-3">Result</label>
+                <div class="form-control col-sm-9">
+                    <input class="input-text" type="text" readonly disabled id="value_result" />
+                </div>
+            </div>
+            <div class="row text-c">
+                <button type="submit" class="btn btn-primary radius" id="callapibtn">Call API</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-4">
+        <form id="submit_register" class="form form-horizontal">
+            <h3>Register</h3>
+            <div class="row">
+                <label class="form-label col-sm-4">UserName</label>
+                <div class="form-control col-sm-8">
+                    <input class="input-text" type="text" id="registerUsername" />
+                </div>
+            </div>
+            <div class="row">
+                <label class="form-label col-sm-4">Password</label>
+                <div class="form-control col-sm-8">
+                    <input class="input-text" type="password" id="registerPassword" />
+                </div>
+            </div>
+            <div class="row">
+                <label class="form-label col-sm-4">Confirm Password</label>
+                <div class="form-control col-sm-8">
+                    <input class="input-text" type="password" id="registerPassword2" />
+                </div>
+            </div>
+            <div class="row text-c">
+                <button type="submit" class="btn btn-primary radius"id="registerbtn">Register</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-4">
+        <h3>Log In</h3>
+        <form id="submit_login" class="form form-horizontal">
+            <div class="row">
+                <label class="form-label col-sm-4">UserName</label>
+                <div class="form-control col-sm-8">
+                    <input class="input-text" type="text" id="loginUsername" />
+                </div>
+            </div>
+            <div class="row">
+                <label class="form-label col-sm-4">Password</label>
+                <div class="form-control col-sm-8">
+                    <input class="input-text" type="password" id="loginPassword" />
+                </div>
+            </div>
+            <div class="row text-c">
+                <button type="submit" class="btn btn-primary radius" id="loginbtn">Log In</button>
+                <button data-bind="click: logout" class="btn btn-primary radius" id="logoutbtn">Log Out</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row cl mt-15" id="resmessage">
+</div>
+<div class="row cl mt-15" id="tokeninfo">
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            $("#callapibtn").on("click", function (e) {
+                e.preventDefault();
+                fncallapi();
+            });
+            $("#registerbtn").on("click", function (e) {
+                e.preventDefault();
+                fnregister();
+            });
+            $("#loginbtn").on("click", function (e) {
+                e.preventDefault();
+                fnlogin();
+            });
+            $("#logoutbtn").on("click", function (e) {
+                e.preventDefault();
+                fnlogout();
+            });
+        });
+        var tokenKey = 'accessToken';
+        function showError(jqXHR) {
+            $('#value_result').val(jqXHR.status + ': ' + jqXHR.statusText);
+            $('#resmessage').html(jqXHR.responseText);
+        }
+
+        function fncallapi() {
+            $('#value_result').val('');
+            $('#resmessage').html('');
+            //var token = sessionStorage.getItem(tokenKey);
+            //var headers = {};
+            //if (token) {
+            //    headers.Authorization = 'Bearer ' + token;
+            //} else {
+            //    headers.Authorization = 'Bearer ' + token1;
+            //}
+
+            $.ajax({
+                type: 'GET',
+                url: '/api/Account/Users',
+                dataType: "text"
+            }).done(function (data) {
+                $('#value_result').val('成功');
+                $('#resmessage').html(data);
+            }).fail(showError);
+        }
+
+        function fnregister() {
+            $('#value_result').val('');
+            $('#resmessage').html('');
+            var data = {
+                UserName: $('#registerUsername').val(),
+                Password: $('#registerPassword').val(),
+                ConfirmPassword: $('#registerPassword2').val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/Account/Register',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function (data) {
+                $('#value_result').val('注册成功!');
+                $('#resmessage').html(data.responseText);
+            }).fail(showError);
+        }
+
+        function fnlogin() {
+            $('#value_result').val('');
+            $('#resmessage').html('');
+            var loginData = {
+                grant_type: 'password',
+                username: $('#loginUsername').val(),
+                password: $('#loginPassword').val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/Token',
+                data: loginData
+            }).done(function (data) {
+                $('#value_user').val(data.userName);
+                sessionStorage.setItem(tokenKey, data.access_token);
+                $('#resmessage').html(data.responseText);
+                var info = 'access_token: ' + data.access_token + '<br/>' + 'token_type: ' + data.token_type + '<br/>'
+                    + 'expires_in: ' + data.expires_in + '<br/>' + 'issued: ' + data['.issued'] + '<br/>'
+                    + 'expires: ' + data['.expires'];
+                $('#tokeninfo').html(info);
+            }).fail(showError);
+        }
+
+        function fnlogout() {
+            $('#value_user').val('');
+            $.ajax({
+                type: 'POST',
+                url: '/api/Account/Logout'
+            }).done(function (data) {
+                sessionStorage.removeItem(tokenKey)
+                $('#resmessage').html(data.responseText);
+            }).fail(showError);
+        }
+    </script>
+}

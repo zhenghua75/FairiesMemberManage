@@ -1,0 +1,89 @@
+﻿{
+  "Table": "Users",
+  "Fields": [
+    {
+      "DbField": "Users.UserName",
+      "Validators": [
+        {
+          "Name": "Required",
+          "Message": "请输入用户名"
+        },
+        {
+          "Name": "Unique",
+          "Message": "用户名重复"
+        }
+      ]
+    },
+    {
+      "DbField": "Users.FullName",
+      "Validators": [
+        {
+          "Name": "Required",
+          "Message": "请输入姓名"
+        }
+      ]
+    },
+    {
+      "DbField": "Users.AuthorityType",
+      "Type": "int",
+      "Options": {
+        "Table": "NameCode",
+        "Value": "Value",
+        "Label": "Name",
+        "Condition": {
+          "Key": "Type",
+          "Value": "AuthorityType"
+        }
+      }
+
+    },
+    {
+      "DbField": "Users.LockoutEnabled",
+      "Type": "bool"
+    },
+    {
+      "DbField": "Users.DeptId",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Depts.Name"
+    },
+    {
+      "DbField": "Users.WhId",
+      "Options": {
+        "Table": "Warehouse",
+        "Value": "Id",
+        "Labels": [ "DeptId", "Name" ]
+      }
+    },
+    {
+      "DbField": "Warehouse.Name"
+    },
+    {
+      "DbField": "NameCode.Name"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Depts",
+      "Field1": "Users.DeptId",
+      //"Op": "=",
+      "Field2": "Depts.Id"
+    },
+    {
+      "Table": "(select * from NameCode where Type = 'AuthorityType') as NameCode",
+      "Field1": "Users.AuthorityType",
+      //"Op": "=",
+      "Field2": "NameCode.Value"
+    },
+    {
+      "Table": "Warehouse",
+      "Field1": "Users.WhId",
+      "Field2": "Warehouse.Id"
+    }
+  ]
+ }

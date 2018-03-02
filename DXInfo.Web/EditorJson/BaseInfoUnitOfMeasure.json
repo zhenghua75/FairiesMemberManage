@@ -1,0 +1,42 @@
+﻿{
+  "Table": "UOM",
+  "Fields": [
+    {
+      "DbField": "UOM.Code"
+    },
+    {
+      "DbField": "UOM.Name"
+    },
+    {
+      "DbField": "UOM.Comment"
+    },
+    {
+      "DbField": "UOM.UOMGroup",
+      "Type": "int",
+      "Options": {
+        "Table": "UOMGroup",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "UOMGroup.Name"
+    },
+    {
+      "DbField": "UOM.Rate",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "UOM.IsMain",
+      "Type": "bool"
+    }
+
+  ],
+  "LeftJoins": [
+    {
+      "Table": "UOMGroup",
+      "Field1": "UOM.UOMGroup",
+      "Field2": "UOMGroup.Id"
+    }
+  ]
+}

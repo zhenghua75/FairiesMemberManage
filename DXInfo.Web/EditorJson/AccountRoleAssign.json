@@ -1,0 +1,58 @@
+﻿{
+  "Table": "Users",
+  "Fields": [
+    {
+      "DbField": "Users.Id",
+      "Type": "int"
+    },
+    {
+      "DbField": "Users.UserName"
+    },
+    {
+      "DbField": "Depts.Id",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Depts.Name"
+    },
+    {
+      "DbField": "Users.FullName"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Depts",
+      "Field1": "Users.DeptId",
+      "Field2": "Depts.Id"
+    }
+  ],
+  "MJoin": {
+    "Table": "Roles",
+    "Link1": {
+      "Field1": "Roles.Id",
+      "Field2": "UserRoles.RoleId"
+    },
+    "Link2": {
+      "Field1": "Users.Id",
+      "Field2": "UserRoles.UserId"
+    },
+    "Fields": [
+      {
+        "DbField": "Id",
+        "Type": "int",
+        "Options": {
+          "Table": "Roles",
+          "Value": "Id",
+          "Label": "Name"
+        }
+      },
+      {
+        "DbField": "Name"
+      }
+    ]
+  }
+}

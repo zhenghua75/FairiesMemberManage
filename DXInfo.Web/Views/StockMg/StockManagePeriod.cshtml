@@ -1,0 +1,75 @@
+﻿<div id="page-content">
+    <nav class="breadcrumb hidden-xs">
+        <i class="iconfont icon-home"></i>
+        <a class="maincolor" href="/">主控台</a>
+        <span class="c-999">&gt;</span>库存管理
+        <span class="c-999">&gt;</span>初始设置
+        <span class="c-999">&gt;</span><span class="c-666">库存月结周期</span>
+    </nav>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-primary radius" id="stockmgperiodtable">
+                <div class="panel-header">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-fangda4 btn-default yuanbtn-MINI" data-click="panel-expand"></a>
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-huanyipi btn-success yuanbtn-MINI" data-click="panel-reload"></a>
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-jianhao btn-warning yuanbtn-MINI" data-click="panel-collapse"></a>
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-close btn-danger yuanbtn-MINI" data-click="panel-remove"></a>
+                    </div>
+                    <h4 class="panel-title">库存月结周期管理</h4>
+                </div>
+                <div class="panel-body">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div id="yearModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="yearModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void();">×</button>
+                <h4 class="modal-title">按年创建周期</h4>
+            </div>
+            <div class="modal-body form-horizontal">
+                <div class="row row-form">
+                    <label class="form-label col-xs-4 col-sm-3">年份</label>
+                    <div class="col-xs-8 col-sm-9">
+                        <select class="select" id="' + val.id + '"></select>
+                    </div>
+                </div>
+                <div class="row row-form">
+                    <label class="form-label col-xs-4 col-sm-3">起始月</label>
+                    <div class="col-xs-8 col-sm-9">
+                        <input type="text" class="input-text" id="' + val.id + '"></input>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary radius" id="yearModalBtn">确定</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+@section scripts{
+    <script>
+        //返回顶部
+        var $backToTopEle = $('<a href="javascript:void(0)" class="iconfont icon-top toTop" title="返回顶部" alt="返回顶部" style="display: none"></a>').appendTo($("body")).click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 120);
+        });
+        var $backToTopFun = function () {
+            var st = $(document).scrollTop(), winh = $(window).height();
+            (st > 0) ? $backToTopEle.show() : $backToTopEle.hide();
+            /*IE6下的定位*/
+            if (!window.XMLHttpRequest) {
+                $backToTopEle.css("top", st + winh - 166);
+            }
+        };
+        $(function () { $(window).on("scroll", $backToTopFun); $backToTopFun(); });
+        $(document).ready(function () {
+            App.init();
+        });
+    </script>
+    <script src="~/Scripts/stockmgperiod.js"></script>
+    <script src="~/Scripts/datatables-ready.js"></script>
+}

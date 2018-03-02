@@ -1,0 +1,158 @@
+﻿@using DXInfo.Identity.Dapper
+@model DXInfo.Identity.Dapper.Func
+<div id="page-content">
+    <nav class="breadcrumb hidden-xs">
+        <i class="iconfont icon-home"></i>
+        <a class="maincolor" href="/">主控台</a>
+        <a href="/System/UserInfo?tab=3" class="btn btn-primary radius iconfont icon-guanli1 size-MINI f-r mt-10"> 设置</a>
+    </nav>
+    <div class="row cl mb-10 haoinfo">
+        <input id="gparamuserwhid" type="hidden" value="@User.Identity.GetWhId()" />
+        <input id="gparamauthtype" type="hidden" value="@User.Identity.GetUser().AuthorityType" />
+        @{var userfuncs = User.Identity.GetUserFuncs();}
+        @foreach (Func userfunc in userfuncs)
+        {
+            if (userfunc.Name == "ReportConsItem")
+            {
+                <div class="col-md-3 col-sm-6 mb-10">
+                    <div class="widget widget-stats bg-aqua">
+                        <div class="stats-icon stats-icon-lg">
+                            <i class="fa fa-shopping-cart fa-fw"></i>
+                        </div>
+                        <div class="stats-title">
+                            会员销售额(昨日/当月)
+                        </div>
+                        <div class="stats-number assfee">
+                            --
+                        </div>
+                        <div class="stats-desc asspercent">
+                            环比上涨(--%)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-10">
+                    <div class="widget widget-stats bg-purple">
+                        <div class="stats-icon stats-icon-lg">
+                            <i class="fa fa-shopping-cart fa-fw"></i>
+                        </div>
+                        <div class="stats-title">
+                            零售销售额(昨日/当月)
+                        </div>
+                        <div class="stats-number tailfee">
+                            --
+                        </div>
+                        <div class="stats-desc tailpercent">
+                            环比上涨(--%)
+                        </div>
+                    </div>
+                </div>
+            }
+            if (userfunc.Name == "ReportFillQuery")
+            {
+                <div class="col-md-3 col-sm-6 mb-10">
+                    <div class="widget widget-stats bg-black">
+                        <div class="stats-icon stats-icon-lg">
+                            <i class="fa fa-comments fa-fw"></i>
+                        </div>
+                        <div class="stats-title">
+                            充值(昨日/当月)
+                        </div>
+                        <div class="stats-number fillfee">
+                            --
+                        </div>
+                        <div class="stats-desc fillpercent">
+                            环比上涨(--%)
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        <div class="col-md-3 col-sm-6 mb-10">
+            <a href="/StockMg/Vouch?type=012">
+                <div class="widget widget-stats bg-green">
+                    <div class="stats-icon stats-icon-lg">
+                        <i class="fa fa-globe fa-fw"></i>
+                    </div>
+                    <div class="stats-title">
+                        叫货
+                    </div>
+                    <div class="stats-number mixmv">
+                        -/-
+                    </div>
+                    <div class="stats-desc">
+                        最近一周 (未完结/总叫货)
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-10">
+            <a href="/StockMg/Vouch?type=014">
+                <div class="widget widget-stats bg-blue">
+                    <div class="stats-icon stats-icon-lg">
+                        <i class="fa fa-tags fa-fw"></i>
+                    </div>
+                    <div class="stats-title">
+                        生产
+                    </div>
+                    <div class="stats-number makeupmv">
+                        -/-
+                    </div>
+                    <div class="stats-desc">
+                        最近一周 (未完结/总被叫货)
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    @*<div class="row cl">
+        <div class="col-sm-12">
+            <div class="widget-chart with-sidebar bg-black">
+                <div class="widget-chart-content">
+                    <h4 class="chart-title">
+                        Visitors Analytics <small>Where do our visitors come from</small>
+                    </h4>
+                    <div id="visitors-line-chart" class="morris-inverse" style="height: 260px;">
+                    </div>
+                </div>
+                <div class="widget-chart-sidebar bg-black-darker">
+                    <div class="chart-number">
+                        1,225,729 <small>visitors</small>
+                    </div>
+                    <div id="visitors-donut-chart" style="height: 160px">
+                    </div>
+                    <ul class="chart-legend">
+                        <li><i class="iconfont icon-icon00096 c-success mr-5"></i>34.0% <span>New Visitors</span></li>
+                        <li><i class="iconfont icon-icon00096 c-primary mr-5"></i>56.0% <span>Return Visitors</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>*@
+</div>
+@section Css{
+    <link href="~/Scripts/vendors/morris/morris.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Scripts/vendors/morris/raphael.min.js"></script>
+    <script src="~/Scripts/vendors/morris/morris.js"></script>
+    <script>
+        //返回顶部
+        var $backToTopEle = $('<a href="javascript:void(0)" class="iconfont icon-top toTop" title="返回顶部" alt="返回顶部" style="display: none"></a>').appendTo($("body")).click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 120);
+        });
+        var $backToTopFun = function () {
+            var st = $(document).scrollTop(), winh = $(window).height();
+            (st > 0) ? $backToTopEle.show() : $backToTopEle.hide();
+            /*IE6下的定位*/
+            if (!window.XMLHttpRequest) {
+                $backToTopEle.css("top", st + winh - 166);
+            }
+        };
+        $(function () { $(window).on("scroll", $backToTopFun); $backToTopFun(); });
+        $(document).ready(function() {
+            App.init();
+           //mainController.init();
+        });
+    </script>
+    <script src="~/Scripts/index.js"></script>
+}

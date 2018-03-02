@@ -1,0 +1,60 @@
+﻿<div id="page-content">
+    <nav class="breadcrumb hidden-xs">
+        <i class="iconfont icon-home"></i>
+        <a class="maincolor" href="/">主控台</a>
+        <span class="c-999">&gt;</span>库存管理
+        <span class="c-999">&gt;</span>帐表
+        <span class="c-999">&gt;</span><span class="c-666">@ViewBag.Title</span>
+    </nav>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-primary radius" id="reportvouchsummarypanel">
+                @if (User.Identity.GetIsLocator())
+                {
+                    <input id="gparamisloctor" type="hidden" value="true" />
+                }
+                else
+                {
+                    <input id="gparamisloctor" type="hidden" value="false" />
+                }
+                <div class="panel-header">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-fangda4 btn-default yuanbtn-MINI" data-click="panel-expand"></a>
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-huanyipi btn-success yuanbtn-MINI" data-click="panel-reload"></a>
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-jianhao btn-warning yuanbtn-MINI" data-click="panel-collapse"></a>
+                        <a href="javascript:;" class="btn btn-xs iconfont icon-close btn-danger yuanbtn-MINI" data-click="panel-remove"></a>
+                    </div>
+                    <h4 class="panel-title">@ViewBag.Title</h4>
+                </div>
+                <div class="panel-body">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Css{
+    <link href="~/Scripts/vendors/bootstrap-datetimepicker/css/datetimepicker.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Scripts/vendors/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script>
+        //返回顶部
+        var $backToTopEle = $('<a href="javascript:void(0)" class="iconfont icon-top toTop" title="返回顶部" alt="返回顶部" style="display: none"></a>').appendTo($("body")).click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 120);
+        });
+        var $backToTopFun = function () {
+            var st = $(document).scrollTop(), winh = $(window).height();
+            (st > 0) ? $backToTopEle.show() : $backToTopEle.hide();
+            /*IE6下的定位*/
+            if (!window.XMLHttpRequest) {
+                $backToTopEle.css("top", st + winh - 166);
+            }
+        };
+        $(function () { $(window).on("scroll", $backToTopFun); $backToTopFun(); });
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    <script src="~/Scripts/reportvouchsummary.js"></script>
+    <script src="~/Scripts/datatablesreport-ready.js"></script>
+}

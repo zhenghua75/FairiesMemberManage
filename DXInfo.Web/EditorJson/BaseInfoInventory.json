@@ -1,0 +1,166 @@
+﻿{
+  "Table": "Inventory",
+  "Fields": [
+    {
+      "DbField": "Inventory.Category",
+      "Type": "int",
+      "Options": {
+        "Table": "InvCategory",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "InvCategory.Name"
+    },
+    {
+      "DbField": "Inventory.Code"
+    },
+    {
+      "DbField": "Inventory.Name"
+    },
+    {
+      "DbField": "Inventory.Specs"
+    },
+    {
+      "DbField": "Inventory.Comment"
+    },
+    {
+      "DbField": "Inventory.IsInvalid",
+      "Type": "bool"
+    },
+    {
+      "DbField": "InvStock.UOMGroup",
+      "Type": "int",
+      "Options": {
+        "Table": "UOMGroup",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "UOMGroup.Name"
+    },
+    {
+      "DbField": "InvStock.SaleUOM",
+      "Type": "int",
+      "Options": {
+        "Table": "UOM",
+        "Value": "Id",
+        "Labels": [ "UOMGroup", "Name" ]
+      }
+    },
+    {
+      "DbField": "SaleUOM.Name"
+    },
+    {
+      "DbField": "InvStock.PurchaseUOM",
+      "Type": "int",
+      "Options": {
+        "Table": "UOM",
+        "Value": "Id",
+        "Labels": [ "UOMGroup", "Name" ]
+      }
+    },
+    {
+      "DbField": "PurchaseUOM.Name"
+    },
+    {
+      "DbField": "InvStock.StockUOM",
+      "Type": "int",
+      "Options": {
+        "Table": "UOM",
+        "Value": "Id",
+        "Labels": [ "UOMGroup", "Name" ]
+      }
+    },
+    {
+      "DbField": "StockUOM.Name"
+    },
+    {
+      "DbField": "InvStock.HighStock",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "InvStock.LowStock",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "InvStock.SecurityStock",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "InvStock.CheckCycle",
+      "Type": "int"
+    },
+    {
+      "DbField": "InvStock.SomeDay",
+      "Type": "int"
+    },
+    {
+      "DbField": "InvStock.IsShelfLife",
+      "Type": "bool"
+    },
+    {
+      "DbField": "InvStock.ShelfLife",
+      "Type": "int"
+    },
+    {
+      "DbField": "InvStock.EarlyWarningDay",
+      "Type": "int"
+    },
+    {
+      "DbField": "InvStock.ShelfLifeType",
+      "Type": "int",
+      "Options": {
+        "Table": "NameCode",
+        "Value": "Value",
+        "Label": "Name",
+        "Condition": {
+          "Key": "Type",
+          "Value": "ShelfLifeType"
+        }
+      }
+    },
+    {
+      "DbField": "NameCode.Name"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "InvStock",
+      "Field1": "Inventory.Id",
+      "Field2": "InvStock.Id"
+    },
+    {
+      "Table": "InvCategory",
+      "Field1": "Inventory.Category",
+      "Field2": "InvCategory.Id"
+    },
+    {
+      "Table": "UOMGroup as UOMGroup",
+      "Field1": "InvStock.UOMGroup",
+      "Field2": "UOMGroup.Id"
+    },
+    {
+      "Table": "UOM as SaleUOM",
+      "Field1": "InvStock.SaleUOM",
+      "Field2": "SaleUOM.Id"
+    },
+    {
+      "Table": "UOM as PurchaseUOM",
+      "Field1": "InvStock.PurchaseUOM",
+      "Field2": "PurchaseUOM.Id"
+    },
+    {
+      "Table": "UOM as StockUOM",
+      "Field1": "InvStock.StockUOM",
+      "Field2": "StockUOM.Id"
+    },
+    {
+      "Table": "(select * from NameCode where Type = 'ShelfLifeType') as NameCode",
+      "Field1": "InvStock.ShelfLifeType",
+      "Field2": "NameCode.Value"
+    }
+  ]
+}

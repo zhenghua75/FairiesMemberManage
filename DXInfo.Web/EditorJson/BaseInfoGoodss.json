@@ -1,0 +1,73 @@
+﻿{
+  "Table": "Inventory",
+  "Fields": [
+    {
+      "DbField": "Inventory.Category",
+      "Type": "int",
+      "Options": {
+        "Table": "InvCategory",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "InvCategory.Name"
+    },
+    {
+      "DbField": "Inventory.Code"
+    },
+    {
+      "DbField": "Inventory.Name"
+    },
+    {
+      "DbField": "Inventory.Specs"
+    },
+    {
+      "DbField": "Inventory.Comment"
+    },
+    {
+      "DbField": "Inventory.IsInvalid",
+      "Type": "bool"
+    },
+    {
+      "DbField": "InvSale.Spell"
+    },
+    {
+      "DbField": "InvSale.Price",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "InvSale.Rate",
+      "Type": "int"
+    },
+    {
+      "DbField": "InvSale.IgValue",
+      "Type": "int"
+    },
+    {
+      "DbField": "InvSale.NewFlag",
+      "Type": "bool"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "InvSale",
+      "Field1": "Inventory.Id",
+      "Field2": "InvSale.Id"
+    },
+    {
+      "Table": "InvCategory",
+      "Field1": "Inventory.Category",
+      "Field2": "InvCategory.Id"
+    }
+  ],
+  "Event": {
+    "Type": "DXInfo.DataTables.Events.InvSale,DXInfo.DataTables.Events",
+    "Methods": [
+      {
+        "EventName": "PreCreate",
+        "MethodName": "PreInvSaleCreate"
+      }
+    ]
+  }
+}

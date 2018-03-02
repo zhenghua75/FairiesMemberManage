@@ -1,0 +1,34 @@
+﻿{
+  "Table": "Locator",
+  "Fields": [
+    {
+      "DbField": "Locator.Code"
+    },
+    {
+      "DbField": "Locator.Name"
+    },
+    {
+      "DbField": "Warehouse.Name"
+    },
+    {
+      "DbField": "Locator.WhId",
+      "Type": "int",
+      "Options": {
+        "Table": "Warehouse",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Locator.Comment"
+    }
+
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Warehouse",
+      "Field1": "Warehouse.Id",
+      "Field2": "Locator.WhId"
+    }
+  ]
+}

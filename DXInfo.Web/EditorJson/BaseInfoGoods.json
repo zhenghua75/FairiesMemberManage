@@ -1,0 +1,68 @@
+﻿{
+  "Table": "InvSale",
+  "Fields": [
+    {
+      "DbField": "Inventory.Category",
+      "Type": "int",
+      "Options": {
+        "Table": "InvCategory",
+        "Value": "Id",
+        "Label": "Name",
+        "Condition": {
+          "Key": "CategoryType",
+          "Value": 1
+        }
+      }
+    },
+    {
+      "DbField": "InvCategory.Name"
+    },
+    {
+      "DbField": "Inventory.Code"
+    },
+    {
+      "DbField": "Inventory.Name"
+    },
+    {
+      "DbField": "Inventory.Specs"
+    },
+    {
+      "DbField": "Inventory.Comment"
+    },
+    {
+      "DbField": "Inventory.IsInvalid",
+      "Type": "bool"
+    },
+    {
+      "DbField": "InvSale.Spell"
+    },
+    {
+      "DbField": "InvSale.Price",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "InvSale.Rate",
+      "Type": "int"
+    },
+    {
+      "DbField": "InvSale.IgValue",
+      "Type": "int"
+    },
+    {
+      "DbField": "InvSale.NewFlag",
+      "Type": "bool"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Inventory",
+      "Field1": "Inventory.Id",
+      "Field2": "InvSale.Id"
+    },
+    {
+      "Table": "InvCategory",
+      "Field1": "Inventory.Category",
+      "Field2": "InvCategory.Id"
+    }
+  ]
+}

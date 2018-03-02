@@ -1,0 +1,102 @@
+﻿{
+  "Table": "#T AS Vouch",
+  "Fields": [
+    {
+      "DbField": "Warehouse.DeptId"
+    },
+    {
+      "DbFIeld": "Depts.Name"
+    },
+    {
+      "DbField": "Vouch.WhId",
+      "Options": {
+        "Table": "Warehouse",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Warehouse.Name"
+    },
+    {
+      "DbField": "Vouch.InvId"
+    },
+    {
+      "DbField": "Vouch.Batch"
+    },
+    {
+      "DbField": "Vouch.MadeDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Vouch.InvalidDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Inventory.Name"
+    },
+    {
+      "DbField": "Inventory.Specs"
+    },
+    {
+      "DbField": "InvStock.StockUOM"
+    },
+    {
+      "DbField": "UOM.Name"
+    },
+    {
+      "DbField": "Vouch.InitNum",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "Vouch.InNum",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "Vouch.OutNum",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "Vouch.Num",
+      "Type": "decimal"
+    }
+  ],
+  "Event": {
+    "Type": "DXInfo.DataTables.Events.StockManageBatchSummary,DXInfo.DataTables.Events",
+    "Methods": [
+      {
+        "EventName": "PreSelect",
+        "MethodName": "PreStockManageBatchSummarySelect"
+      }
+    ]
+  },
+  "LeftJoins": [
+    {
+      "Table": "Warehouse",
+      "Field1": "Vouch.WhId",
+      "Field2": "Warehouse.Id"
+    },
+    {
+      "Table": "Depts",
+      "Field1": "Warehouse.DeptId",
+      "Field2": "Depts.Id"
+    },
+    {
+      "Table": "Inventory",
+      "Field1": "Vouch.InvId",
+      "Field2": "Inventory.Id"
+    },
+    {
+      "Table": "InvStock",
+      "Field1": "Vouch.InvId",
+      "Field2": "InvStock.Id"
+    },
+    {
+      "Table": "UOM",
+      "Field1": "InvStock.StockUOM",
+      "Field2": "UOM.Id"
+    }
+  ]
+}

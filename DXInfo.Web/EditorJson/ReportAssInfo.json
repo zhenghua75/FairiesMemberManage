@@ -1,0 +1,98 @@
+﻿{
+  "Table": "tbAssociator",
+  "Pkey": "iAssID",
+  "Fields": [
+    {
+      "DbField": "tbAssociator.vcCardID"
+    },
+    {
+      "DbField": "tbAssociator.vcAssName"
+    },
+    {
+      "DbField": "tbAssociator.vcLinkPhone"
+    },
+    {
+      "DbField": "tbAssociator.vcSpell"
+    },
+    {
+      "DbField": "tbAssociator.vcAssType",
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='AT') AS NameCode",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "NameCodeAT.Name"
+    },
+    {
+      "DbField": "tbAssociator.vcAssState",
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='AS') AS NameCode",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "NameCodeAS.Name"
+    },
+    {
+      "DbField": "tbAssociator.nCharge",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "tbAssociator.iIgValue",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "tbAssociator.vcDeptID",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Depts.Name"
+    },
+    {
+      "DbField": "tbAssociator.dtCreateDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "tbAssociator.vcAssNbr"
+    },
+    {
+      "DbField": "tbAssociator.vcLinkAddress"
+    },
+    {
+      "DbField": "tbAssociator.vcEmail"
+    },
+    {
+      "DbField": "tbAssociator.dtOperDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "tbAssociator.vcComments"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "(SELECT * FROM NameCode WHERE Type='AT') AS NameCodeAT",
+      "Field1": "tbAssociator.vcAssType",
+      "Field2": "NameCodeAT.Code"
+    },
+    {
+      "Table": "(SELECT * FROM NameCode WHERE Type='AS') AS NameCodeAS",
+      "Field1": "tbAssociator.vcAssState",
+      "Field2": "NameCodeAS.Code"
+    },
+    {
+      "Table": "Depts",
+      "Field1": "tbAssociator.vcDeptID",
+      "Field2": "Depts.Code"
+    }
+  ]
+}

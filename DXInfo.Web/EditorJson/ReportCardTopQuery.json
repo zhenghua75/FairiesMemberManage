@@ -1,0 +1,35 @@
+﻿{
+  "Table": "tbConsItemOther",
+  "Pkey": "tbConsItemOther.vcCardID",
+  "Fields": [
+    {
+      "DbField": "tbConsItemOther.vcCardID",
+      "Group": true
+    },
+    {
+      "DbField": "tbAssociator.vcAssName",
+      "Group": true
+    },
+    {
+      "DbField": "SUM(tbConsItemOther.nFee) AS tbConsItemOther.SaleFee"
+    },
+    {
+      "DbField": "'' AS tbConsItemOther.vcDeptId",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "'' AS tbConsItemOther.dtConsDate"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "tbAssociator",
+      "Field1": "tbConsItemOther.iAssId",
+      "Field2": "tbAssociator.iAssId"
+    }
+  ]
+}

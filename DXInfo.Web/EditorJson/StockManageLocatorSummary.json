@@ -1,0 +1,98 @@
+﻿{
+  "Table": "#T AS Vouch",
+  "Fields": [
+    {
+      "DbField": "Warehouse.DeptId"
+    },
+    {
+      "DbFIeld": "Depts.Name"
+    },
+    {
+      "DbField": "Vouch.WhId",
+      "Options": {
+        "Table": "Warehouse",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Warehouse.Name"
+    },
+    {
+      "DbField": "Vouch.InvId"
+    },
+    {
+      "DbField": "Inventory.Name"
+    },
+    {
+      "DbField": "Inventory.Specs"
+    },
+    {
+      "DbField": "InvStock.StockUOM"
+    },
+    {
+      "DbField": "UOM.Name"
+    },
+    {
+      "DbField": "Vouch.LocatorId",
+      "Options": {
+        "Table": "LocatorId",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Vouch.InitNum"
+    },
+    {
+      "DbField": "Vouch.InNum"
+    },
+    {
+      "DbField": "Vouch.OutNum"
+    },
+    {
+      "DbField": "Vouch.Num"
+    }
+  ],
+  "Event": {
+    "Type": "DXInfo.DataTables.Events.StockManageLocatorSummary,DXInfo.DataTables.Events",
+    "Methods": [
+      {
+        "EventName": "PreSelect",
+        "MethodName": "PreStockManageLocatorSummarySelect"
+      }
+    ]
+  },
+  "LeftJoins": [
+    {
+      "Table": "Warehouse",
+      "Field1": "Vouch.WhId",
+      "Field2": "Warehouse.Id"
+    },
+    {
+      "Table": "Depts",
+      "Field1": "Warehouse.DeptId",
+      "Field2": "Depts.Id"
+    },
+    {
+      "Table": "Inventory",
+      "Field1": "Vouch.InvId",
+      "Field2": "Inventory.Id"
+    },
+    {
+      "Table": "InvStock",
+      "Field1": "Vouch.InvId",
+      "Field2": "InvStock.Id"
+    },
+    {
+      "Table": "UOM",
+      "Field1": "InvStock.StockUOM",
+      "Field2": "UOM.Id"
+    },
+    {
+      "Table": "Locator",
+      "Field1": "Vouch.LocatorId",
+      "Field2": "Locator.Id"
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+﻿{
+  "Table": "CurrentStock",
+  "Fields": [
+    {
+      "DbField": "CurrentStock.WhId",
+      "Type": "int",
+      "Options": {
+        "Table": "Warehouse",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Warehouse.Name"
+    },
+    {
+      "DbField": "CurrentStock.LocatorId",
+      "Type": "int",
+      "Options": {
+        "Table": "Locator",
+        "Value": "Id",
+        "Labels": [ "Name", "WhId" ]
+      }
+    },
+    {
+      "DbField": "Locator.Name"
+    },
+    {
+      "DbField": "CurrentStock.InvId",
+      "Type": "int",
+      "Options": {
+        "Table": "(SELECT b.Id,CASE WHEN d.Spell IS NULL THEN b.Code ELSE d.Spell END AS Code,b.Name,b.Specs,c.Name as StockUOMName,b.IsInvalid,a.IsShelfLife,a.ShelfLifeType,a.ShelfLife FROM InvStock a LEFT JOIN Inventory b on a.Id=b.Id LEFT JOIN UOM c on a.StockUOM=c.Id LEFT JOIN InvSale d on a.Id=d.Id WHERE b.IsInvalid=0) as InventoryStock",
+        "Value": "Id",
+        "Labels": [ "Code", "Name", "Specs", "StockUOMName", "IsShelfLife", "ShelfLifeType", "ShelfLife" ],
+        "Condition": {
+          "Key": "IsInvalid",
+          "Value": false
+        }
+      }
+    },
+    {
+      "DbField": "Inventory.Code"
+    },
+    {
+      "DbField": "Inventory.Name"
+    },
+    {
+      "DbField": "Inventory.Specs"
+    },
+    {
+      "DbField": "UOM.Name"
+    },
+    {
+      "DbField": "InvStock.IsShelfLife",
+      "Type": "bool"
+    },
+    {
+      "DbField": "InvStock.ShelfLife"
+    },
+    {
+      "DbField": "InvStock.ShelfLifeType"
+    },
+    {
+      "DbField": "NameCodeShelfLifeType.Name"
+    },
+    {
+      "DbField": "Inventory.Category",
+      "Options": {
+        "Table": "InvCategory",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "InvCategory.Code"
+    },
+    {
+      "DbField": "InvCategory.Name"
+    },
+    {
+      "DbField": "CurrentStock.Batch"
+    },
+    {
+      "DbField": "CurrentStock.Num",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "CurrentStock.MadeDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "CurrentStock.InvalidDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "CurrentStock.StopFlag",
+      "Type": "bool"
+    },
+    {
+      "DbField": "CurrentStock.Price",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "CurrentStock.Amount",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "InvStock.EarlyWarningDay",
+      "Type": "int"
+    },
+    {
+      "DbField": "InvStock.HighStock",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "InvStock.LowStock",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "InvStock.SecurityStock",
+      "Type": "decimal"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Inventory",
+      "Field1": "CurrentStock.InvId",
+      "Field2": "Inventory.Id"
+    },
+    {
+      "Table": "InvCategory",
+      "Field1": "Inventory.Category",
+      "Field2": "InvCategory.Id"
+    },
+    {
+      "Table": "InvStock",
+      "Field1": "Inventory.Id",
+      "Field2": "InvStock.Id"
+    },
+    {
+      "Table": "UOM",
+      "Field1": "InvStock.StockUOM",
+      "Field2": "UOM.Id"
+    },
+    {
+      "Table": "(SELECT * FROM NameCode WHERE Type='ShelfLifeType') AS NameCodeShelfLifeType",
+      "Field1": "InvStock.ShelfLifeType",
+      "Field2": "NameCodeShelfLifeType.Value"
+    },
+    {
+      "Table": "Warehouse",
+      "Field1": "CurrentStock.WhId",
+      "Field2": "Warehouse.Id"
+    },
+    {
+      "Table": "Locator",
+      "Field1": "CurrentStock.LocatorId",
+      "Field2": "Locator.Id"
+    }
+  ]
+}

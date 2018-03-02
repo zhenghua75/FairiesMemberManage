@@ -1,0 +1,79 @@
+﻿{
+  "Table": "Depts",
+  "Fields": [
+    {
+      "DbField": "Depts.ParentId",
+      "Type": "int",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "ParentDepts.Name"
+    },
+    {
+      "DbField": "Depts.Address"
+    },
+    {
+      "DbField": "Depts.Code"
+    },
+    {
+      "DbField": "Depts.Name"
+    },
+    {
+      "DbField": "Depts.Manager",
+      "Type": "int",
+      "Options": {
+        "Table": "Users",
+        "Value": "Id",
+        "Label": "FullName"
+      }
+
+    },
+    {
+      "DbField": "Users.FullName"
+    },
+    {
+      "DbField": "Depts.Comment"
+    },
+    {
+      "DbField": "Depts.IsDeptPrice",
+      "Type": "bool"
+    },
+    {
+      "DbField": "Depts.DeptType",
+      "Type": "int",
+      "Options": {
+        "Table": "NameCode",
+        "Value": "Value",
+        "Label": "Name",
+        "Condition": {
+          "Key": "Type",
+          "Value": "DeptType"
+        }
+      }
+    },
+    {
+      "DbField": "NameCode.Name"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Depts as ParentDepts",
+      "Field1": "Depts.ParentId",
+      "Field2": "ParentDepts.Id"
+    },
+    {
+      "Table": "(select * from NameCode where Type = 'DeptType') as NameCode",
+      "Field1": "Depts.DeptType",
+      "Field2": "NameCode.Value"
+    },
+    {
+      "Table": "Users",
+      "Field1": "Users.Id",
+      "Field2": "Depts.Manager"
+    }
+  ]
+}

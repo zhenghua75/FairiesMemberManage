@@ -1,0 +1,141 @@
+﻿{
+  "Table": "Vouchs",
+  "Fields": [
+    {
+      "DbField": "Vouchs.VouchId",
+      "Type": "int"
+    },
+    {
+      "DbField": "Vouchs.InvId",
+      "Type": "int",
+      "Options": {
+        "Table": "(SELECT b.Id,CASE WHEN d.Spell IS NULL THEN b.Code ELSE d.Spell END AS Code,b.Name,d.Price,e.Code as CategoryCode,b.Specs,c.Name as StockUOMName,b.IsInvalid,a.IsShelfLife,a.ShelfLifeType,a.ShelfLife FROM InvStock a LEFT JOIN Inventory b on a.Id=b.Id LEFT JOIN UOM c on a.StockUOM=c.Id LEFT JOIN InvSale d on a.Id=d.Id LEFT JOIN InvCategory e ON b.Category=e.Id WHERE b.IsInvalid=0) as InventoryStock",
+        "Value": "Id",
+        "Labels": [ "Code", "Name", "Price", "CategoryCode", "Specs", "StockUOMName", "IsShelfLife", "ShelfLifeType", "ShelfLife" ],
+        "Condition": {
+          "Key": "IsInvalid",
+          "Value": false
+        }
+      }
+    },
+    {
+      "DbField": "Inventory.Name"
+    },
+    {
+      "DbField": "Inventory.Specs"
+    },
+    {
+      "DbField": "Inventory.Code"
+    },
+    {
+      "DbField": "UOM.Name"
+    },
+    {
+      "DbField": "Vouchs.FromLocatorId",
+      "Type": "int",
+      "Options": {
+        "Table": "Locator",
+        "Value": "Id",
+        "Labels": [ "WhId", "Name" ]
+      }
+    },
+    {
+      "DbField": "FromLocator.Name"
+    },
+    {
+      "DbField": "Vouchs.ToLocatorId",
+      "Type": "int",
+      "Options": {
+        "Table": "Locator",
+        "Value": "Id",
+        "Labels": [ "WhId", "Name" ]
+      }
+    },
+    {
+      "DbField": "ToLocator.Name"
+    },
+    {
+      "DbField": "Vouchs.Batch"
+    },
+    {
+      "DbField": "Vouchs.Num",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "Vouchs.CNum",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "Vouchs.Price",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "Vouchs.Amount",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "Vouchs.MadeDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Vouchs.InvalidDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Vouchs.Memo"
+    },
+    {
+      "DbField": "InvSale.Id",
+      "Type": "int"
+    },
+    {
+      "DbField": "InvSale.Price",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "InvCategory.Code"
+    },
+    {
+      "DbField": "InvCategory.Name"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Inventory",
+      "Field1": "Vouchs.InvId",
+      "Field2": "Inventory.Id"
+    },
+    {
+      "Table": "InvStock",
+      "Field1": "Vouchs.InvId",
+      "Field2": "InvStock.Id"
+    },
+    {
+      "Table":"UOM",
+      "Field1":"InvStock.StockUOM",
+      "Field2":"UOM.Id"
+    },
+    {
+      "Table":"Locator as FromLocator",
+      "Field1":"Vouchs.FromLocatorId",
+      "Field2":"FromLocator.Id"
+    },
+    {
+      "Table": "Locator as ToLocator",
+      "Field1": "Vouchs.ToLocatorId",
+      "Field2": "ToLocator.Id"
+    },
+    {
+      "Table": "InvSale",
+      "Field1": "InvSale.Id",
+      "Field2": "Vouchs.InvId"
+    },
+    {
+      "Table": "InvCategory",
+      "Field1": "Inventory.Category",
+      "Field2": "InvCategory.Id"
+    }
+  ]
+}

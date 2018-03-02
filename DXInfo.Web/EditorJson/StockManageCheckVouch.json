@@ -1,0 +1,130 @@
+﻿{
+  "Table": "Vouch",
+  "Fields": [
+    {
+      "DbField": "Vouch.Code"
+    },
+    {
+      "DbField": "Vouch.VouchDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd",
+      "Validators": [
+        {
+          "Name": "Required",
+          "Message": "请输入单据日期"
+        },
+        {
+          "Name": "DateFormat",
+          "Format": "yyyy-MM-dd",
+          "Message": "单据日期格式错误"
+        }
+      ]
+    },
+    {
+      "DbField": "Vouch.FromWhId",
+      "Type": "int",
+      "Validators": [
+        {
+          "Name": "Required",
+          "Message": "请选择转出仓库"
+        }
+      ]
+    },
+    {
+      "DbField": "Vouch.ToWhId",
+      "Type": "int",
+      "Validators": [
+        {
+          "Name": "Required",
+          "Message": "请选择转入仓库"
+        }
+      ]
+    },
+    {
+      "DbField": "OutWarehouse.Name"
+    },
+    {
+      "DbField": "InWarehouse.Name"
+    },
+    {
+      "DbField": "Vouch.Memo"
+    },
+    {
+      "DbField": "Vouch.Maker",
+      "Type": "int"
+    },
+    {
+      "DbField": "Vouch.MakeDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Vouch.MakeTime"
+    },
+    {
+      "DbField": "Vouch.IsVerify",
+      "Type": "bool",
+      "Validators": [
+        {
+          "Name": "Boolean",
+          "Message": "请输入Boolean值"
+        }
+      ]
+    },
+    {
+      "DbField": "Vouch.Verifier",
+      "Type": "int"
+    },
+    {
+      "DbField": "Vouch.VerifyDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Vouch.VerifyTime"
+    },
+    {
+      "DbField": "Vouch.Modifier",
+      "Type": "int"
+    },
+    {
+      "DbField": "Vouch.ModifyDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Vouch.ModifyTime"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Warehouse as OutWarehouse",
+      "Field1": "Vouch.FromWhId",
+      "Field2": "OutWarehouse.Id"
+    },
+    {
+      "Table": "Warehouse as InWarehouse",
+      "Field1": "Vouch.ToWhId",
+      "Field2": "InWarehouse.Id"
+    }
+  ],
+  "Wheres": [
+    {
+      "Key": "VouchType",
+      "Value": "010"
+    }
+  ],
+  "Event": {
+    "Type": "DXInfo.DataTables.Events.Vouch,DXInfo.DataTables.Events",
+    "Methods": [
+      {
+        "EventName": "PreCreate",
+        "MethodName": "PreVouchCreate"
+      },
+      {
+        "EventName": "PreEdit",
+        "MethodName": "PreVouchEdit"
+      }
+    ]
+  }
+}

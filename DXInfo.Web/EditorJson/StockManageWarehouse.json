@@ -1,0 +1,42 @@
+﻿{
+  "Table": "Warehouse",
+  "Fields": [
+    {
+      "DbField": "Warehouse.Code"
+    },
+    {
+      "DbField": "Warehouse.Name"
+    },
+    {
+      "DbField": "Warehouse.DeptId",
+      "Type": "int",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Depts.Name"
+    },
+    {
+      "DbField": "Warehouse.Principal"
+    },
+    {
+      "DbField": "Warehouse.Tel"
+    },
+    {
+      "DbField": "Warehouse.Address"
+    },
+    {
+      "DbField": "Warehouse.Comment"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Depts",
+      "Field1": "Depts.Id",
+      "Field2": "Warehouse.DeptId"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+﻿{
+  "Table": "tbConsItemOther",
+  "Pkey": "tbConsItemOther.vcGoodsId",
+  "Fields": [
+    {
+      "DbField": "tbConsItemOther.vcGoodsId",
+      "Group": true
+    },
+    {
+      "DbField": "Inventory.Name",
+      "Group": true
+    },
+    {
+      "DbField": "InvCategory.Name",
+      "Group": true
+    },
+    {
+      "DbField": "SUM(tbConsItemOther.iCount) AS tbConsItemOther.SaleCount",
+      "Type": "int"
+    },
+    {
+      "DbField": "SUM(tbConsItemOther.nFee) AS tbConsItemOther.nFee",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "'' as tbConsItemOther.vcDeptId",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "'' AS tbConsItemOther.dtConsDate"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Inventory",
+      "Field1": "tbConsItemOther.vcGoodsId",
+      "Field2": "Inventory.Code"
+    },
+    {
+      "Table": "InvCategory",
+      "Field1": "Inventory.Category",
+      "Field2": "InvCategory.Id"
+    }
+  ]
+}

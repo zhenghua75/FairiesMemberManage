@@ -1,0 +1,44 @@
+﻿{
+  "Table": "#T AS tbConsItemOther",
+  "Fields": [
+    {
+      "DbField": "tbConsItemOther.SaleFee"
+    },
+    {
+      "DbField": "tbConsItemOther.vcDeptId",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Depts.Name"
+    },
+    {
+      "DbField": "tbConsItemOther.year"
+    },
+    {
+      "DbField": "tbConsItemOther.month"
+    },
+    {
+      "DbField": "tbConsItemOther.day"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Depts",
+      "Field1": "tbConsItemOther.vcDeptID",
+      "Field2": "Depts.Code"
+    }
+  ],
+  "Event": {
+    "Type": "DXInfo.DataTables.Events.ReportSalesChart,DXInfo.DataTables.Events",
+    "Methods": [
+      {
+        "EventName": "PreSelect",
+        "MethodName": "PreReportSalesChartSelect"
+      }
+    ]
+  }
+}

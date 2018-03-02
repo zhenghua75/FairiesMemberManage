@@ -1,0 +1,38 @@
+﻿@using DXInfo.Web.Models
+@model DXInfo.Web.Models.LoginBindingModel
+<div id="page-loader" class="fade in"><span class="spinner"></span></div>
+<div id="page-container" class="row cl">
+    <div class="login-wrap container radius" data-pageload-addclass="animated swing">
+        <div class="login-header cl">
+            <img class="login-wrap-logo" src="~/Content/img/logo.png" alt="" />
+            <span class="login-wrap-title">面包派对网络数据中心</span>
+        </div>
+        <div class="login-container cl">
+            <form action="" class="form form-horizontal" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+                <div class="formControls">
+                    <span class="iconfont icon-denglu admin-ico"></span>
+                    @Html.TextBoxFor(m => m.UserName,new {@class= "input-text radius admin size-L", @placeholder = "请输入用户名" })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+                <div class="formControls mt-20">
+                    <span class="iconfont icon-suoding pasw-ico"></span>
+                    @Html.TextBoxFor(m => m.Password, new { @class = "input-text radius pasw size-L", @placeholder = "请输入密码",@autocomplete = "off" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <div class="login-button mt-20">
+                    <input class="btn btn-block wrap-btn radius size-L" type="submit" value="登 录">
+                    @Html.ValidationMessage("invalid_grant")
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+}

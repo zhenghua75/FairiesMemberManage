@@ -1,0 +1,64 @@
+﻿<div id="page-content">
+    <nav class="breadcrumb hidden-xs">
+        <i class="iconfont icon-home"></i>
+        <a class="maincolor" href="/">主控台</a>
+        <span class="c-999">&gt;</span>系统管理
+        <span class="c-999">&gt;</span><span class="c-666">权限</span>
+    </nav>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-primary radius" id="rolestable">
+                <div class="panel-header">
+                    <div class="btn-group dropDown f-r right">
+                        <a href="javascript:;" data-toggle="dropdown" class="btn btn-success dropdown-toggle radius size-S">
+                            <i class="iconfont icon-practice mr-10"></i>
+                            <span class="rolecurrent">当前角色：</span>
+                            <span class="caret"></span>
+                            <input type="hidden" id="curroleid" />
+                            <input type="hidden" id="drawnum" />
+                        </a>
+                        <ul class="dropDown-menu menu radius f-12" id="dropdown-roles">
+                        </ul>
+                    </div>
+                    <h4 class="panel-title">权限管理</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row text-c mb-10">
+                        <div class="dt-buttons btn-group">
+                            <a class="btn btn-warning radius button-save disabled">
+                                <span>保存</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel-group" id="accordionweb">
+                    </div>
+                    <div class="panel-group" id="accordionclient">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        //返回顶部
+        var $backToTopEle = $('<a href="javascript:void(0)" class="iconfont icon-top toTop" title="返回顶部" alt="返回顶部" style="display: none"></a>').appendTo($("body")).click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 120);
+        });
+        var $backToTopFun = function () {
+            var st = $(document).scrollTop(), winh = $(window).height();
+            (st > 0) ? $backToTopEle.show() : $backToTopEle.hide();
+            /*IE6下的定位*/
+            if (!window.XMLHttpRequest) {
+                $backToTopEle.css("top", st + winh - 166);
+            }
+        };
+        $(function () { $(window).on("scroll", $backToTopFun); $backToTopFun(); });
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    <script src="~/Scripts/rolefuncs.js"></script>
+}

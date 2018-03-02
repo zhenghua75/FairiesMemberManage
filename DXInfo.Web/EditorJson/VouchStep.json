@@ -1,0 +1,8 @@
+﻿{
+  "Table": "Vouch",
+  "Fields": [
+    {
+      "DbField": "Step"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+﻿{
+  "Table": "tbFillFeeOther",
+  "PKey": "iSerial",
+  "Fields": [
+    {
+      "DbField": "tbFillFeeOther.iSerial",
+      "Type": "int64"
+    },
+    {
+      "DbField": "tbFillFeeOther.vcCardID"
+    },
+    {
+      "DbField": "tbAssociator.vcAssName"
+    },
+    {
+      "DbField": "tbAssociator.vcAssType",
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='AT') AS NameCode",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "NameCodeAT.Name"
+    },
+    {
+      "DbField": "tbFillFeeOther.nFillFee"
+    },
+    {
+      "DbField": "tbFillFeeOther.nFillProm"
+    },
+    {
+      "DbField": "tbFillFeeOther.nFeeLast"
+    },
+    {
+      "DbField": "tbFillFeeOther.nFeeCur"
+    },
+    {
+      "DbField": "tbFillFeeOther.vcComments"
+    },
+    {
+      "DbField": "tbFillFeeOther.dtFillDate"
+    },
+    {
+      "DbField": "tbFillFeeOther.vcOperName",
+      "Options": {
+        "Table": "Users",
+        "Value": "FullName",
+        "Label": "FullName"
+      }
+    },
+    {
+      "DbField": "tbFillFeeOther.vcDeptID",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Depts.Name"
+    },
+    {
+      "DbField": "CASE WHEN tbFillFeeOther.nFillFee>0 and tbFillFeeOther.vcComments='' THEN '现金充值' WHEN tbFillFeeOther.nFillFee<0 and tbFillFeeOther.vcComments='' THEN '会员消费' WHEN tbFillFeeOther.nFillFee>0 and tbFillFeeOther.vcComments='银行卡' THEN '银行卡充值' WHEN tbFillFeeOther.nFillFee<0 and tbFillFeeOther.vcComments like '回收卡' THEN '会员卡回收' WHEN tbFillFeeOther.nFillFee>0 and tbFillFeeOther.vcComments like '补卡%' THEN '会员补卡' WHEN tbFillFeeOther.vcComments like '合并%' THEN '会员合并' ELSE '' END AS tbFillFeeOther.vcOperType"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "tbAssociator",
+      "Field1": "tbFillFeeOther.iAssId",
+      "Field2": "tbAssociator.iAssId"
+    },
+    {
+      "Table": "(SELECT * FROM NameCode WHERE Type='AT') AS NameCodeAT",
+      "Field1": "tbAssociator.vcAssType",
+      "Field2": "NameCodeAT.Code"
+    },
+    {
+      "Table": "Depts",
+      "Field1": "tbFillFeeOther.vcDeptId",
+      "Field2": "Depts.Code"
+    }
+  ]
+}

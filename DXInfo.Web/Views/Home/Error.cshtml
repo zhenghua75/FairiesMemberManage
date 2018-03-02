@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/kmdxUIcss")
+    @Styles.Render("~/Content/webcss")
+</head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<body>
+    <div id="page-container" class="fade in">
+        <div class="error">
+            <div class="error-code mb-10">@ViewBag.errorcode <i class="iconfont icon-tishi"></i></div>
+            <div class="error-content">
+                <div class="error-message">@ViewBag.errormsg</div>
+                <div class="error-desc mb-20">@ViewBag.errordesc</div>
+                <div>
+                    <a href="javascript:window.history.go(-1)" class="btn btn-success">返回</a>
+                    <a href="/" class="btn btn-success">主控台</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

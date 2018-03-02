@@ -1,0 +1,78 @@
+﻿<div id="page-content">
+    <nav class="breadcrumb hidden-xs">
+        <i class="iconfont icon-home"></i>
+        <a class="maincolor" href="/">主控台</a>
+        <span class="c-999">&gt;</span>库存管理
+        <span class="c-999">&gt;</span>日常业务
+        <span class="c-999">&gt;</span><span class="c-666">@ViewBag.Title</span>
+    </nav>
+    <div class="row">
+        <div class="col-sm-12">
+            <input id="curvid" type="hidden" value="@ViewBag.Mvid" />
+            <input id="curtype" type="hidden" value="@ViewBag.Mvtype" />
+            <input id="gparamuserwhid" type="hidden" value="@User.Identity.GetWhId()" />
+            @if (User.Identity.GetIsLocator())
+            {
+                <input id="gparamisloctor" type="hidden" value="true" />
+            }
+            else
+            {
+                <input id="gparamisloctor" type="hidden" value="false" />
+            }
+            @if (User.Identity.GetIsBatch())
+            {
+                <input id="gparamisbatch" type="hidden" value="true" />
+            }
+            else
+            {
+                <input id="gparamisbatch" type="hidden" value="false" />
+            }
+            @if (User.Identity.GetIsShelfLife())
+            {
+                <input id="gparamisshlife" type="hidden" value="true" />
+            }
+            else
+            {
+                <input id="gparamisshlife" type="hidden" value="false" />
+            }
+            <div id="rootwizard" class="navbar-wizard-wrapper">
+                <div class="navbar mb-10">
+                    <div class="navbar-black">
+                        <div class="nav navbar-nav" role="navigation" id="vouchnav">
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <ul class="pager wizard">
+                        <li class="previous"><a href="javascript:;">上一步</a></li>
+                        <li class=""><a href="/StockMg/Vouch?type=008">返回不合格品单页面</a></li>
+                        <li class="next"><a href="javascript:;">下一步</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/vendors/wizard/jquery.bootstrap.wizard.js"></script>
+    <script>
+        //返回顶部
+        var $backToTopEle = $('<a href="javascript:void(0)" class="iconfont icon-top toTop" title="返回顶部" alt="返回顶部" style="display: none"></a>').appendTo($("body")).click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 120);
+        });
+        var $backToTopFun = function () {
+            var st = $(document).scrollTop(), winh = $(window).height();
+            (st > 0) ? $backToTopEle.show() : $backToTopEle.hide();
+            /*IE6下的定位*/
+            if (!window.XMLHttpRequest) {
+                $backToTopEle.css("top", st + winh - 166);
+            }
+        };
+        $(function () { $(window).on("scroll", $backToTopFun); $backToTopFun(); });
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    <script src="~/Scripts/stockmgscrapvouch.js"></script>
+}

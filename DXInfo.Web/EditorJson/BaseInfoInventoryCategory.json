@@ -1,0 +1,37 @@
+﻿{
+  "Table": "InvCategory",
+  "Fields": [
+    {
+      "DbField": "InvCategory.Code"
+    },
+    {
+      "DbField": "InvCategory.Name"
+    },
+    {
+      "DbField": "InvCategory.Comment"
+    },
+    {
+      "DbField": "InvCategory.CategoryType",
+      "Type": "int",
+      "Options": {
+        "Table": "NameCode",
+        "Value": "Value",
+        "Label": "Name",
+        "Condition": {
+          "Key": "Type",
+          "Value": "CategoryType"
+        }
+      }
+    },
+    {
+      "DbField": "NameCode.Name"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "(select * from NameCode where Type = 'CategoryType') as NameCode",
+      "Field1": "InvCategory.CategoryType",
+      "Field2": "NameCode.Value"
+    }
+  ]
+}

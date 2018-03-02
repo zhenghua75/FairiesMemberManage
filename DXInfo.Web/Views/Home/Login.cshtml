@@ -1,0 +1,78 @@
+﻿@using DXInfo.Web.Models
+@model DXInfo.Web.Models.LoginBindingModel
+<div id="page-loader" class="fade in"><span class="spinner"></span></div>
+<div id="page-container" class="row cl">
+    <div class="login-wrap container radius" data-pageload-addclass="animated swing">
+        <div class="login-header cl">
+            <img class="login-wrap-logo" src="~/Content/img/logo.png" alt="" />
+            <span class="login-wrap-title">面包派对网络数据中心</span>
+        </div>
+        <div class="login-container cl">
+            <form action="" class="form form-horizontal" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" id="returnUrl" />
+                <div class="formControls">
+                    <span class="iconfont icon-denglu admin-ico"></span>
+                    @Html.TextBoxFor(m => m.UserName,new {@class= "input-text radius admin size-L", @placeholder = "请输入用户名" })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+                <div class="formControls mt-20">
+                    <span class="iconfont icon-suoding pasw-ico"></span>
+                    @Html.PasswordFor(m => m.Password, new { @class = "input-text radius pasw size-L", @placeholder = "请输入密码",@autocomplete = "off" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <div class="login-button mt-20">
+                    <input class="btn btn-block wrap-btn radius size-L" type="submit" value="登 录">
+                    @Html.ValidationMessage("invalid_grant")
+                </div>
+                <div class="row cl mt-15" id="resmessage">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function() {
+            App.init();
+            $("form").on("submit", function (e) {
+                e.preventDefault();
+                $('#resmessage').html('');
+                fnlogin();
+            });
+        });
+        function fnlogin() {
+            var loginData = {
+                grant_type: 'password',
+                username: $('#UserName').val(),
+                password: $('#Password').val()
+            };
+            if (loginData.username == '' || loginData.password == '') {
+                $('#resmessage').html('请输入用户名和密码');
+                return false;
+            }
+
+            var r = '<div class="login-loader"><span class="spinner-small"></span></div>';
+            $('#page-container').prepend(r);
+
+            $.ajax({
+                type: 'POST',
+                url: '/Token',
+                data: loginData
+            }).done(function (data) {
+                $('#page-container').find(".login-loader").remove()
+                location.href = $('#returnUrl').val();
+            }).fail(function (jqXHR) {
+                $('#page-container').find(".login-loader").remove()
+                if (jqXHR.status == 400) {
+                    var errobj = eval("(" + jqXHR.responseText + ")");
+                    if(errobj.error=='invalid_grant'){
+                        $('#resmessage').html(errobj.error_description);
+                    }
+                } else {
+                    $('#resmessage').html('暂时无法登录，服务器无响应');
+                }
+            });
+        }
+    </script>
+}

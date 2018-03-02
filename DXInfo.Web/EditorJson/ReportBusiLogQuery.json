@@ -1,0 +1,76 @@
+﻿{
+  "Table": "tbBusiLogOther",
+  "Pkey": "iSerial",
+  "Fields": [
+    {
+      "DbField": "tbBusiLogOther.iSerial"
+    },
+    {
+      "DbField": "tbAssociator.vcAssName"
+    },
+    {
+      "DbField": "NameCodeAT.Name"
+    },
+    {
+      "DbField": "tbBusiLogOther.vcCardID"
+    },
+    {
+      "DbField": "tbBusiLogOther.vcOperType",
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='OP') AS NameCode",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "NameCodeOP.Name"
+    },
+    {
+      "DbField": "tbBusiLogOther.vcOperName",
+      "Options": {
+        "Table": "Users",
+        "Value": "FullName",
+        "Label": "FullName"
+      }
+    },
+    {
+      "DbField": "tbBusiLogOther.dtOperDate"
+    },
+    {
+      "DbField": "tbBusiLogOther.vcDeptID",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Depts.Name"
+    },
+    {
+      "DbField": "tbBusiLogOther.vcComments"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "tbAssociator",
+      "Field1": "tbBusiLogOther.vcCardID",
+      "Field2": "tbAssociator.vcCardID"
+    },
+    {
+      "Table": "(SELECT * FROM NameCode WHERE Type='AT') AS NameCodeAT",
+      "Field1": "tbAssociator.vcAssType",
+      "Field2": "NameCodeAT.Code"
+    },
+    {
+      "Table": "(SELECT * FROM NameCode WHERE Type='OP') AS NameCodeOP",
+      "Field1": "tbBusiLogOther.vcOperType",
+      "Field2": "NameCodeOP.Code"
+    },
+    {
+      "Table": "Depts",
+      "Field1": "tbBusiLogOther.vcDeptID",
+      "Field2": "Depts.Code"
+    }
+  ]
+}

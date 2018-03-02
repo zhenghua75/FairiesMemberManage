@@ -1,0 +1,78 @@
+﻿{
+  "Table": "#T AS Cons",
+  "Fields": [
+    {
+      "DbField": "Cons.vcDeptId",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Depts.Name"
+    },
+    {
+      "DbField": "Cons.vcAssType",
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='AT') AS NameCode",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "NameCodeAT.Name"
+    },
+    {
+      "DbField": "Cons.vcGoodsType",
+      "Options": {
+        "Table": "InvCategory",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "InvCategory.Name"
+    },
+    {
+      "DbField": "Cons.vcGoodsName"
+    },
+    {
+      "DbField": "Cons.tolcount",
+      "Type": "int"
+    },
+    {
+      "DbField": "Cons.tolfee",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "Cons.dtConsDate"
+    }
+  ],
+  "Event": {
+    "Type": "DXInfo.DataTables.Events.ReportConsKindQuery,DXInfo.DataTables.Events",
+    "Methods": [
+      {
+        "EventName": "PreSelect",
+        "MethodName": "PreReportConsKindQuerySelect"
+      }
+    ]
+  },
+  "LeftJoins": [
+    {
+      "Table": "Depts",
+      "Field1": "Cons.vcDeptId",
+      "Field2": "Depts.Code"
+    },
+    {
+      "Table": "(SELECT * FROM NameCode WHERE Type='AT') AS NameCodeAT",
+      "Field1": "Cons.vcAssType",
+      "Field2": "NameCodeAT.Code"
+    },
+    {
+      "Table": "InvCategory",
+      "Field1": "Cons.vcGoodsType",
+      "Field2": "InvCategory.Code"
+    }
+  ]
+}

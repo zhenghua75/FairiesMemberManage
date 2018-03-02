@@ -1,0 +1,112 @@
+﻿{
+  "Table": "tbConsItemOther",
+  "Pkey": "iSerial",
+  "Fields": [
+    {
+      "DbField": "tbConsItemOther.iSerial",
+      "Type": "int64"
+    },
+    {
+      "DbField": "tbConsItemOther.vcCardID"
+    },
+    {
+      "DbField": "tbAssociator.vcAssName"
+    },
+    {
+      "DbField": "tbAssociator.vcAssType",
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='AT') AS NameCode",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "tbConsItemOther.vcGoodsID",
+      "Options": {
+        "Table": "(SELECT b.Code,b.Name FROM InvSale a LEFT JOIN Inventory b ON a.Id=b.Id) AS Inv",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Inventory.Name"
+    },
+    {
+      "DbField": "tbConsItemOther.nPrice",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "tbConsItemOther.iCount",
+      "Type": "int"
+    },
+    {
+      "DbField": "tbConsItemOther.nFee",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "tbBillOther.vcConsType",
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='PT') AS NameCode",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "tbConsItemOther.vcComments"
+    },
+    {
+      "DbField": "tbConsItemOther.cFlag",
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='Flag') AS NameCode",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "tbConsItemOther.dtConsDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "tbConsItemOther.vcOperName",
+      "Options": {
+        "Table": "Users",
+        "Value": "FullName",
+        "Label": "FullName"
+      }
+    },
+    {
+      "DbField": "tbConsItemOther.vcDeptID",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Depts.Name"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "tbBillOther",
+      "IsCondition": true,
+      "Condition": "tbConsItemOther.iSerial=tbBillOther.iSerial AND tbConsItemOther.iAssId=tbBillOther.iAssId AND tbConsItemOther.vcDeptID=tbBillOther.vcDeptID"
+    },
+    {
+      "Table": "tbAssociator",
+      "Field1": "tbConsItemOther.iAssId",
+      "Field2": "tbAssociator.iAssId"
+    },
+    {
+      "Table": "Depts",
+      "Field1": "tbConsItemOther.vcDeptId",
+      "Field2": "Depts.Code"
+    },
+    {
+      "Table": "Inventory",
+      "Field1": "tbConsItemOther.vcGoodsID",
+      "Field2": "Inventory.Code"
+    }
+  ]
+}

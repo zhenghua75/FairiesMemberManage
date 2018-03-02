@@ -1,0 +1,20 @@
+﻿{
+  "Table": "NameCode",
+  "Fields": [
+    {
+      "DbField": "Type"
+    },
+    {
+      "DbField": "Code"
+    },
+    {
+      "DbField": "Name"
+    },
+    {
+      "DbField": "Value"
+    },
+    {
+      "DbField": "Comment"
+    }
+  ]
+}

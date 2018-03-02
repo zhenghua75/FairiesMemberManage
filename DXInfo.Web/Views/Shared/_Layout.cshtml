@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html class="login-backgrond">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/kmdxUIcss")
+    @Styles.Render("~/Content/webcss")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<body>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer class="footer">
+        <p>&copy;2013-2016 昆明道讯科技有限公司</p>
+    </footer>
+    @Scripts.Render("~/bundles/kmdxUIjs")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

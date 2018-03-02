@@ -1,0 +1,83 @@
+﻿{
+  "Table": "#T AS tbBusiIncomeReport",
+  "Fields": [
+    {
+      "DbField": "tbBusiIncomeReport.vcDateZoom"
+    },
+    {
+      "DbField": "tbBusiIncomeReport.vcDeptId",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Depts.Name"
+    },
+    {
+      "DbField": "tbBusiIncomeReport.ReNo",
+      "Type": "int"
+    },
+    {
+      "DbField": "tbBusiIncomeReport.Type"
+    },
+    {
+      "DbField": "BusiIncome.Name"
+    },
+    {
+      "DbField": "tbBusiIncomeReport.REP1",
+      "Type": "int"
+    },
+    {
+      "DbField": "tbBusiIncomeReport.REP2",
+      "Type": "int"
+    },
+    {
+      "DbField": "tbBusiIncomeReport.REP3",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "tbBusiIncomeReport.REP4",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "tbBusiIncomeReport.REP5",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "tbBusiIncomeReport.REP6",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "tbBusiIncomeReport.REP7",
+      "Type": "int"
+    },
+    {
+      "DbField": "tbBusiIncomeReport.dtCreateDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Depts",
+      "Field1": "tbBusiIncomeReport.vcDeptId",
+      "Field2": "Depts.Code"
+    },
+    {
+      "Table": "(SELECT * FROM NameCode WHERE Type='BusiIncome') BusiIncome",
+      "Field1": "tbBusiIncomeReport.Type",
+      "Field2": "BusiIncome.Code"
+    }
+  ],
+  "Event": {
+    "Type": "DXInfo.DataTables.Events.ReportBusiIncome,DXInfo.DataTables.Events",
+    "Methods": [
+      {
+        "EventName": "PreSelect",
+        "MethodName": "PreReportBusiIncomeSelect"
+      }
+    ]
+  }
+  }

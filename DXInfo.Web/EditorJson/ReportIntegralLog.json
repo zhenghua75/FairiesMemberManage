@@ -1,0 +1,61 @@
+﻿{
+  "Table": "tbIntegralLogOther",
+  "PKey": "iSerial",
+  "Fields": [
+    {
+      "DbField": "tbIntegralLogOther.iSerial"
+    },
+    {
+      "DbField": "tbIntegralLogOther.vcCardId"
+    },
+    {
+      "DbField": "tbIntegralLogOther.vcIgType",
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='IGT') AS NameCodeIGT",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "tbIntegralLogOther.iIgLast",
+      "Type": "int"
+    },
+    {
+      "DbField": "tbIntegralLogOther.iIgGet",
+      "Type": "int"
+    },
+    {
+      "DbField": "tbIntegralLogOther.iIgArrival",
+      "Type": "int"
+    },
+    {
+      "DbField": "tbIntegralLogOther.dtIgDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "tbIntegralLogOther.vcOperName"
+    },
+    {
+      "DbField": "tbIntegralLogOther.vcComments"
+    },
+    {
+      "DbField": "tbIntegralLogOther.vcDeptId",
+      "Options": {
+        "Table": "Depts",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Depts.Name"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Depts",
+      "Field1": "tbIntegralLogOther.vcDeptId",
+      "Field2": "Depts.Code"
+    }
+  ]
+}

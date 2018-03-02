@@ -1,0 +1,334 @@
+﻿{
+  "Table": "Vouchs",
+  "Fields": [
+    {
+      "DbField": "Vouchs.VouchId",
+      "Type": "int"
+    },
+    {
+      "DbField": "Vouchs.InvId",
+      "Type": "int",
+      "Options": {
+        "Table": "(SELECT b.Id,CASE WHEN d.Spell IS NULL THEN b.Code ELSE d.Spell END AS Code,b.Name,d.Price,e.Code as CategoryCode,b.Specs,c.Name as StockUOMName,b.IsInvalid,a.IsShelfLife,a.ShelfLifeType,a.ShelfLife FROM InvStock a LEFT JOIN Inventory b on a.Id=b.Id LEFT JOIN UOM c on a.StockUOM=c.Id LEFT JOIN InvSale d on a.Id=d.Id LEFT JOIN InvCategory e ON b.Category=e.Id WHERE b.IsInvalid=0) as InventoryStock",
+        "Value": "Id",
+        "Labels": [ "Code", "Name", "Price", "CategoryCode", "Specs", "StockUOMName", "IsShelfLife", "ShelfLifeType", "ShelfLife" ],
+        "Condition": {
+          "Key": "IsInvalid",
+          "Value": false
+        }
+      }
+    },
+    {
+      "DbField": "Inventory.Name"
+    },
+    {
+      "DbField": "Inventory.Specs"
+    },
+    {
+      "DbField": "Inventory.Code"
+    },
+    {
+      "DbField": "UOM.Name"
+    },
+    {
+      "DbField": "Vouchs.FromLocatorId",
+      "Type": "int",
+      "Options": {
+        "Table": "Locator",
+        "Value": "Id",
+        "Labels": [ "WhId", "Name" ]
+      }
+    },
+    {
+      "DbField": "FromLocator.Name"
+    },
+    {
+      "DbField": "Vouchs.ToLocatorId",
+      "Type": "int",
+      "Options": {
+        "Table": "Locator",
+        "Value": "Id",
+        "Labels": [ "WhId", "Name" ]
+      }
+    },
+    {
+      "DbField": "ToLocator.Name"
+    },
+    {
+      "DbField": "Vouchs.Batch"
+    },
+    {
+      "DbField": "Vouchs.Num",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "Vouchs.CNum",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "Vouchs.Price",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "Vouchs.Amount",
+      "Type": "decimal"
+    },
+    {
+      "DbField": "Vouchs.MadeDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Vouchs.InvalidDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Vouchs.Memo"
+    },
+    {
+      "DbField": "InvSale.Id",
+      "Type": "int"
+    },
+    {
+      "DbField": "Vouch.Code"
+    },
+    {
+      "DbField": "Vouch.VouchType",
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='VouchType') AS NameCode",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "NameCodeVouchType.Name"
+    },
+    {
+      "DbField": "Vouch.BusType",
+      "Options": {
+        "Table": "(SELECT * FROM NameCode WHERE Type='BusType') AS NameCode",
+        "Value": "Code",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "NameCodeBusType.Name"
+    },
+    {
+      "DbField": "Vouch.VouchDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd",
+      "Validators": [
+        {
+          "Name": "Required",
+          "Message": "请输入单据日期"
+        },
+        {
+          "Name": "DateFormat",
+          "Format": "yyyy-MM-dd",
+          "Message": "单据日期格式错误"
+        }
+      ]
+    },
+    {
+      "DbField": "Vouch.FromWhId",
+      "Type": "int",
+      "Options": {
+        "Table": "Warehouse",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Vouch.ToWhId",
+      "Type": "int",
+      "Options": {
+        "Table": "Warehouse",
+        "Value": "Id",
+        "Label": "Name"
+      },
+      "Validators": [
+        {
+          "Name": "Required",
+          "Message": "请选择转入仓库"
+        }
+      ]
+    },
+    {
+      "DbField": "OutWarehouse.Name"
+    },
+    {
+      "DbField": "InWarehouse.Name"
+    },
+    {
+      "DbField": "Vouch.Period",
+      "Options": {
+        "Table": "CheckPeriod",
+        "Value": "Id",
+        "Label": "Code"
+      }
+    },
+    {
+      "DbField": "CheckPeriod.Code"
+    },
+    {
+      "DbField": "Vouch.VenId",
+      "Type": "int",
+      "Options": {
+        "Table": "Vendor",
+        "Value": "Id",
+        "Label": "Name"
+      }
+    },
+    {
+      "DbField": "Vendor.Name"
+    },
+    {
+      "DbField": "Vouch.Memo"
+    },
+    {
+      "DbField": "Vouch.Maker",
+      "Type": "int"
+    },
+    {
+      "DbField": "MakerUsers.FullName"
+    },
+    {
+      "DbField": "Vouch.MakeDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Vouch.MakeTime"
+    },
+    {
+      "DbField": "Vouch.IsVerify",
+      "Type": "bool",
+      "Validators": [
+        {
+          "Name": "Boolean",
+          "Message": "请输入Boolean值"
+        }
+      ]
+    },
+    {
+      "DbField": "Vouch.Verifier",
+      "Type": "int"
+    },
+    {
+      "DbField": "VerifierUsers.FullName"
+    },
+    {
+      "DbField": "Vouch.VerifyDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Vouch.VerifyTime"
+    },
+    {
+      "DbField": "Vouch.Modifier",
+      "Type": "int"
+    },
+    {
+      "DbField": "ModifierUsers.FullName"
+    },
+    {
+      "DbField": "Vouch.ModifyDate",
+      "GetFormatter": "yyyy-MM-dd",
+      "SetFormatter": "yyyy-MM-dd"
+    },
+    {
+      "DbField": "Vouch.ModifyTime"
+    },
+    {
+      "DbField": "Vouch.SourceId"
+    },
+    {
+      "DbField": "Vouch.Step"
+    }
+  ],
+  "LeftJoins": [
+    {
+      "Table": "Vouch",
+      "Field1": "Vouchs.VouchId",
+      "Field2": "Vouch.Id"
+    },
+    {
+      "Table": "Inventory",
+      "Field1": "Vouchs.InvId",
+      "Field2": "Inventory.Id"
+    },
+    {
+      "Table": "InvStock",
+      "Field1": "Vouchs.InvId",
+      "Field2": "InvStock.Id"
+    },
+    {
+      "Table": "UOM",
+      "Field1": "InvStock.StockUOM",
+      "Field2": "UOM.Id"
+    },
+    {
+      "Table": "Locator as FromLocator",
+      "Field1": "Vouchs.FromLocatorId",
+      "Field2": "FromLocator.Id"
+    },
+    {
+      "Table": "Locator as ToLocator",
+      "Field1": "Vouchs.ToLocatorId",
+      "Field2": "ToLocator.Id"
+    },
+    {
+      "Table": "InvSale",
+      "Field1": "InvSale.Id",
+      "Field2": "Vouchs.InvId"
+    },
+    {
+      "Table": "Warehouse as OutWarehouse",
+      "Field1": "Vouch.FromWhId",
+      "Field2": "OutWarehouse.Id"
+    },
+    {
+      "Table": "Warehouse as InWarehouse",
+      "Field1": "Vouch.ToWhId",
+      "Field2": "InWarehouse.Id"
+    },
+    {
+      "Table": "Vendor",
+      "Field1": "Vouch.VenId",
+      "Field2": "Vendor.Id"
+    },
+    {
+      "Table": "Users as MakerUsers",
+      "Field1": "Vouch.Maker",
+      "Field2": "MakerUsers.Id"
+    },
+    {
+      "Table": "Users as VerifierUsers",
+      "Field1": "Vouch.Verifier",
+      "Field2": "VerifierUsers.Id"
+    },
+    {
+      "Table": "Users as ModifierUsers",
+      "Field1": "Vouch.Modifier",
+      "Field2": "ModifierUsers.Id"
+    },
+    {
+      "Table": "CheckPeriod",
+      "Field1": "Vouch.Period",
+      "Field2": "CheckPeriod.Id"
+    },
+    {
+      "Table": "(SELECT * FROM NameCode WHERE Type='VouchType') AS NameCodeVouchType",
+      "Field1": "Vouch.VouchType",
+      "Field2": "NameCodeVouchType.Code"
+    },
+    {
+      "Table": "(SELECT * FROM NameCode WHERE Type='BusType') AS NameCodeBusType",
+      "Field1": "Vouch.BusType",
+      "Field2": "NameCodeBusType.Code"
+    }
+  ]
+}
